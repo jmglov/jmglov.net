@@ -1,0 +1,32 @@
+{:deps {blog/blog {:local/root "."}}
+ :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [tasks-helper :as th])
+  new {:doc "Create new blog article"
+       :task (th/new)}
+  -build-highlighter {:doc "Build Clojure highlighter JS. No longer used."
+                      :task
+                      (when
+                         (seq (fs/modified-since "public/clojure_highlighter.js"
+                               ["src"]))
+                       (shell "npx rollup -c rollup.config.js"))}
+  render {:doc "Render blog"
+          :task (load-file "render.clj")}
+  http-server {:extra-deps {babashka/http-server
+                            {:git/url "https://github.com/babashka/http-server"
+                             :git/sha "b38c1f16ad2c618adae2c3b102a5520c261a7dd3"}}
+               :requires ([babashka.http-server :as http])
+               :task (do
+                       (println "Serving HTML on port 1888")
+                       (http/serve {:port 1888
+                                    :dir "public"}))}
+  watch  {:depends [render http-server]
+          :doc "Watch posts and templates and call render on file changes"
+          :task (load-file "watch.clj")}
+  publish {:doc "Publish to jmglov.net"
+           :depends [render]
+           :task (shell "aws s3 sync --delete public/ s3://jmglov.net/blog/")}
+  clean {:doc "Remove .work and public directory"
+         :task (do (fs/delete-tree ".work")
+                   (fs/delete-tree "public"))}}}
