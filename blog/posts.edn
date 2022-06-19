@@ -2,3 +2,7 @@
  :file "2022-06-17-creating-a-blog-with-clojure.md"
  :categories #{"clojure"}
  :date "2022-06-17"}
+{:title "Actually blogging with Clojure"
+ :file "2022-06-19-actually-blogging-with-clojure.md"
+ :categories #{"clojure"}
+ :date "2022-06-19"}
