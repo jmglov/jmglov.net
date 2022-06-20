@@ -1,6 +1,6 @@
 {:title "Creating a blog with Clojure in 50 simple steps"
  :file "2022-06-17-creating-a-blog-with-clojure.md"
- :categories #{"clojure"}
+ :categories #{"clojure" "nix"}
  :date "2022-06-17"}
 {:title "Actually blogging with Clojure"
  :file "2022-06-19-actually-blogging-with-clojure.md"
