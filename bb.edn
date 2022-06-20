@@ -1,0 +1,13 @@
+{:deps {blog/blog {:local/root "."}}
+ :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [tasks-helper :as th])
+  render {:doc "Render blog"
+          :task (load-file "render.clj")}
+  publish {:doc "Publish to jmglov.net"
+           :depends [render]
+           :task (shell "aws s3 sync public/ s3://jmglov.net/")}
+  clean {:doc "Remove .work and public directory"
+         :task (do (fs/delete-tree ".work")
+                   (fs/delete-tree "public"))}}}

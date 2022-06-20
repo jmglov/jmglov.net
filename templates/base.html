@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <link type="application/atom+xml" rel="alternate" href="atom.xml" title="REPL Adventures">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="site-header">
+        <div class="wrapper">
+            <div class="site-nav">
+                <a class="page-link" href="archive.html">Archive</a>
+                <!-- <a class="page-link" href="https://github.com/borkdude/blog/discussions/categories/posts">Discuss</a> -->
+                <a class="page-link" href="http://jmglov.net/">About</a>
+                <a class="page-link" href="atom.xml">
+                    <img class="page-icon" src="https://www.svgrepo.com/show/362316/feed.svg" width="30px" />
+                </a>
+                <a class="page-link" href="https://twitter.com/jmglov">
+                    <img class="page-icon" src="https://www.svgrepo.com/show/11841/twitter.svg" width="30px" />
+                </a>
+            </div>
+            <div>
+                <h1 class="site-title">
+                    <a class="page-link" href="index.html">jmglov's blog</a>
+                </h1>
+                <p>A blog about stuff but also things.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+
+        {{body | safe }}
+
+        {% if not skip-archive %}
+        <div style="margin-bottom: 20px; float: right;">
+            <a class="page-link" href="archive.html">Archive</a>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                if (!el.classList.contains('clojure')) {
+                    hljs.highlightElement(el);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
