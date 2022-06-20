@@ -63,7 +63,7 @@
 
 (fs/create-dirs (fs/file ".work"))
 
-(def discuss-fallback "https://github.com/borkdude/blog/discussions/categories/posts")
+(def discuss-fallback "https://github.com/jmglov/jmglov.net/discussions/categories/posts")
 
 (doseq [{:keys [file title date legacy discuss]
          :or {discuss discuss-fallback}}
