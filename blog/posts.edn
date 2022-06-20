@@ -6,3 +6,7 @@
  :file "2022-06-19-actually-blogging-with-clojure.md"
  :categories #{"clojure"}
  :date "2022-06-19"}
+{:title "Installing Steam on NixOS in 50 simple steps"
+ :file "2022-06-20-installing-steam-on-nixos.md"
+ :categories #{"nix" "games"}
+ :date "2022-06-20"}
