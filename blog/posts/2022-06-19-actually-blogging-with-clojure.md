@@ -4,9 +4,10 @@ tongue in cheek. This one will be less so, since I've actually gotten stuff
 working. ;)
 
 Assuming that you have [Babashka](https://github.com/babashka/babashka)
-installed (which was really the only difficult part of my odyssey), cloning
-[borkdude’s blog repo](https://github.com/borkdude/blog) from Github should give
-you quite an easy start.
+installed (which should be really easy unless you sail into the perfect storm of
+NixOS + broken zlib), cloning [borkdude’s blog
+repo](https://github.com/borkdude/blog) from Github should give you quite an
+easy start.
 
 Here's all I needed to do after getting my Babashka issues sorted to make it my own:
 
