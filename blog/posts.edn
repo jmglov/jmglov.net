@@ -1,7 +1,19 @@
+{:title "Summertime (and the writing ain’t easy)"
+ :file "2022-06-15-summertime.md"
+ :categories #{"stories"}
+ :date "2022-06-15"}
+{:title "Story of a mediocre fan"
+ :file "2022-06-16-story-of-a-mediocre-fan.md"
+ :categories #{"arsenal" "stories"}
+ :date "2022-06-16"}
 {:title "Creating a blog with Clojure in 50 simple steps"
  :file "2022-06-17-creating-a-blog-with-clojure.md"
  :categories #{"clojure" "nix"}
  :date "2022-06-17"}
+{:title "Aberrant poetry"
+ :file "2022-06-18-aberrant-poetry.md"
+ :categories #{"stories"}
+ :date "2022-06-18"}
 {:title "Actually blogging with Clojure"
  :file "2022-06-19-actually-blogging-with-clojure.md"
  :categories #{"clojure"}
