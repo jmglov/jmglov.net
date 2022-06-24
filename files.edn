@@ -1,2 +1,5 @@
 {:file "code-of-conduct.md"
  :title "Code of conduct"}
+{:maria-dir "teaching/clojure/cffp"
+ :template "templates/maria.html"
+ :title "Clojure for Functional Programmers"}
