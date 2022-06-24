@@ -8,7 +8,7 @@
  :date "2022-06-16"}
 {:title "Creating a blog with Clojure in 50 simple steps"
  :file "2022-06-17-creating-a-blog-with-clojure.md"
- :categories #{"clojure" "nix"}
+ :categories #{"clojure" "nix" "50-simple-steps"}
  :date "2022-06-17"}
 {:title "Aberrant poetry"
  :file "2022-06-18-aberrant-poetry.md"
@@ -20,5 +20,21 @@
  :date "2022-06-19"}
 {:title "Installing Steam on NixOS in 50 simple steps"
  :file "2022-06-20-installing-steam-on-nixos.md"
- :categories #{"nix" "games"}
+ :categories #{"nix" "games" "50-simple-steps"}
  :date "2022-06-20"}
+{:title "The old todo list"
+ :file "2022-06-21-todo-list.md"
+ :categories #{"clojure" "nix"}
+ :date "2022-06-21"}
+{:title "Those about to rock"
+ :file "2022-06-22-about-to-rock.md"
+ :categories #{"waffle"}
+ :date "2022-06-22"}
+{:title "Story of a mediocre fan: chapter 2"
+ :file "2022-06-23-story-of-a-mediocre-fan-2.md"
+ :categories #{"arsenal" "stories"}
+ :date "2022-06-23"}
+{:title "Using HTTPS with S3 static website hosting in 50 simple steps"
+ :file "2022-06-24-s3-https.md"
+ :categories #{"aws" "50-simple-steps"}
+ :date "2022-06-24"}
