@@ -3,3 +3,6 @@
 {:maria-dir "teaching/clojure/cffp"
  :template "templates/maria.html"
  :title "Clojure for Functional Programmers"}
+{:maria-dir "teaching/clojure/fpwc"
+ :template "templates/maria.html"
+ :title "Functional Programming with Clojure"}
