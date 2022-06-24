@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <div class="site-header">
+        <div class="wrapper">
+            <div class="site-nav">
+                <a class="page-link" href="http://jmglov.net/">About</a>
+                <a class="page-link" href="http://jmglov.net/blog/">Blog</a>
+                <a class="page-link" href="https://twitter.com/jmglov">
+                    <img class="page-icon" src="https://www.svgrepo.com/show/11841/twitter.svg" width="30px" />
+                </a>
+            </div>
+            <div>
+                <h1 class="site-title">
+                    <a class="page-link" href="index.html">jmglov's website</a>
+                </h1>
+                <p>A website containing stuff and also things.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <h1>{{title}}</h1>
+        {{body | safe }}
+        <ul class="index">
+            {% for f in maria-files %}
+            <li><span><a href="{{f.url}}"> {{f.name}}</a></span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

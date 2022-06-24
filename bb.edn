@@ -1,4 +1,4 @@
-{:deps {blog/blog {:local/root "."}}
+{:deps {jmglov/jmglov {:local/root "."}}
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
  {:requires ([babashka.fs :as fs]

@@ -6,15 +6,21 @@
    [clojure.string :as str]
    [hiccup2.core :as hiccup]
    [highlighter :as h]
+   [maria]
    [markdown.core :as md]
    [selmer.parser :as selmer]))
 
-(def files (edn/read-string (format "[%s]" (slurp "files.edn"))))
+(def maria-src-base-url "raw.githubusercontent.com/jmglov/jmglov.net/main/")
+
+(def files (->> "files.edn"
+                slurp
+                (format "[%s]")
+                edn/read-string
+                (map (partial maria/mariafy maria-src-base-url))))
 
 (def out-dir "public")
 
-(def base-html
-  (slurp "templates/base.html"))
+(def base-template "templates/base.html")
 
 ;;;; Sync images and CSS
 
@@ -50,15 +56,18 @@
 
 (fs/create-dirs (fs/file ".work"))
 
-(doseq [{:keys [file title]} files]
-  (let [cache-file (fs/file ".work" (html-file file))
+(doseq [{:keys [file dir title context-map template]} files]
+  (let [_ (when dir
+            (fs/create-dirs (format ".work/%s" dir))
+            (fs/create-dirs (format "%s/%s" out-dir dir)))
+        cache-file (fs/file ".work" (html-file file))
         markdown-file (fs/file file)
         body (let [body (markdown->html markdown-file)]
                (spit cache-file body)
                body)
-        html (selmer/render base-html
-                            {:title title
-                             :body body})
+        html (selmer/render (slurp (or template base-template))
+                            (merge context-map {:title title
+                                                :body body}))
         html-file (str/replace file ".md" ".html")]
     (spit (fs/file out-dir html-file) html)))
 
