@@ -1,3 +1,5 @@
+{:file "index.md"
+ :title "jmglov's website"}
 {:file "code-of-conduct.md"
  :title "Code of conduct"}
 {:maria-dir "teaching/clojure/cffp"
