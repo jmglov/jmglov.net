@@ -38,3 +38,7 @@
  :file "2022-06-24-s3-https.md"
  :categories #{"aws" "50-simple-steps"}
  :date "2022-06-24"}
+{:title "Midsommar"
+ :file "2022-06-25-midsommar.md"
+ :categories #{"waffle"}
+ :date "2022-06-25"}
