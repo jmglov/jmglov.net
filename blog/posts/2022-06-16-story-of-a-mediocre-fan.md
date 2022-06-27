@@ -15,5 +15,9 @@ offered to post some of my work if I even got around to writing about Arsenal.
 Well, I finally got around to it, and Tim posted the first part of a story I
 wrote about how I became and Arsenal fan.
 
-You can read it over on 7amkickoff: "[Story of a mediocre
-fan](https://7amkickoff.com/index.php/2022/06/16/story-of-a-mediocre-fan/)".
+You can read "Story of a mediocre fan" over on 7amkickoff:
+- [Chapter
+  1](https://7amkickoff.com/index.php/2022/06/16/story-of-a-mediocre-fan/)
+- [Chapter
+  2](https://7amkickoff.com/index.php/2022/06/23/story-of-a-mediocre-fan-chapter-2/)
+- Chapter 3 - coming on Thursday, 30 June

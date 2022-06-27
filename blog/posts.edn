@@ -42,3 +42,15 @@
  :file "2022-06-25-midsommar.md"
  :categories #{"waffle"}
  :date "2022-06-25"}
+{:title "Tying off loose ends"
+ :file "2022-06-26-loose-ends.md"
+ :categories #{"aws" "s3" "lambda" "clojure"}
+ :date "2022-06-26"}
+{:title "Tennis, anyone?"
+ :file "2022-06-27-tennis-anyone.md"
+ :categories #{"tennis"}
+ :date "2022-06-27"}
+#_{:title "Blambda!"
+ :file "2022-06-28-blambda.md"
+ :categories #{"aws" "s3" "lambda" "clojure"}
+ :date "2022-06-28"}
