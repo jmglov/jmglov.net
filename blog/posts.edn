@@ -62,7 +62,11 @@
  :file "2022-06-30-story-of-a-mediocre-fan-3.md"
  :categories #{"arsenal" "stories"}
  :date "2022-06-30"}
-#_{:title "Blambda!"
- :file "2022-07-01-blambda.md"
- :categories #{"aws" "s3" "lambda" "clojure"}
+{:title "The Warsaw Pact"
+ :file "2022-07-01-warsaw-pact.md"
+ :categories #{"waffle"}
  :date "2022-07-01"}
+#_{:title "Blambda!"
+ :file "2022-07-02-blambda.md"
+ :categories #{"aws" "s3" "lambda" "clojure"}
+ :date "2022-07-02"}
