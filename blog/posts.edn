@@ -50,7 +50,19 @@
  :file "2022-06-27-tennis-anyone.md"
  :categories #{"tennis"}
  :date "2022-06-27"}
-#_{:title "Blambda!"
- :file "2022-06-28-blambda.md"
- :categories #{"aws" "s3" "lambda" "clojure"}
+{:title "Hotter than hell... sinki"
+ :file "2022-06-28-hotter-than-hellsinki.md"
+ :categories #{"waffle"}
  :date "2022-06-28"}
+{:title "Rover's birthday"
+ :file "2022-06-29-rovers-birthday.md"
+ :categories #{"waffle"}
+ :date "2022-06-29"}
+{:title "Story of a mediocre fan: chapter 3"
+ :file "2022-06-30-story-of-a-mediocre-fan-3.md"
+ :categories #{"arsenal" "stories"}
+ :date "2022-06-30"}
+#_{:title "Blambda!"
+ :file "2022-07-01-blambda.md"
+ :categories #{"aws" "s3" "lambda" "clojure"}
+ :date "2022-07-01"}
