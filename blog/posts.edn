@@ -66,6 +66,10 @@
  :file "2022-07-01-warsaw-pact.md"
  :categories #{"waffle"}
  :date "2022-07-01"}
+{:title "Two simple things"
+ :file "2022-07-02-two-simple-things.md"
+ :categories #{"waffle"}
+ :date "2022-07-02"}
 #_{:title "Blambda!"
  :file "2022-07-02-blambda.md"
  :categories #{"aws" "s3" "lambda" "clojure"}
