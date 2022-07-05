@@ -76,5 +76,9 @@
  :date "2022-07-03"}
 {:title "Dogfooding Blambda! : revenge of the pod people"
  :file "2022-07-04-dogfooding-blambda-1.md"
- :categories #{"aws" "s3" "lambda" "clojure"}
+ :categories #{"aws" "s3" "lambda" "clojure" "blambda"}
  :date "2022-07-04"}
+{:title "Hacking the blog: favicon"
+ :file "2022-07-05-hacking-blog-favicon.md"
+ :categories #{"clojure" "blog"}
+ :date "2022-07-05"}
