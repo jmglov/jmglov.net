@@ -31,6 +31,12 @@
 (spit (fs/file out-dir "style.css")
       (slurp "templates/style.css"))
 
+;;;; Sync favicon
+
+(def favicon-dir (fs/create-dirs (fs/file out-dir)))
+
+(fs/copy-tree "favicon" favicon-dir {:replace-existing true})
+
 ;;;; Generate posts from markdown
 
 (defn markdown->html [file]
