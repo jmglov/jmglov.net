@@ -125,6 +125,40 @@
                       :title (str blog-title " - Archive")
                       :body (hiccup/html (post-links))}))
 
+;;;; Generate category pages
+
+(def posts-by-category
+  (->> posts
+       (sort-by :date)
+       (mapcat (fn [{:keys [categories] :as post}]
+                 (map (fn [category] [category post]) categories)))
+       (reduce (fn [acc [category post]]
+                 (update acc category #(conj % post)))
+               {})))
+
+(defn category-links [category posts]
+  [:div {:style "width: 600px;"}
+   [:h1 (str "Category - " category)]
+   [:ul.index
+    (for [{:keys [file title date preview]} posts
+          :when (not preview)]
+      [:li [:span
+            [:a {:href (str "../" (str/replace file ".md" ".html"))}
+             title]
+            " - "
+            date]])]])
+
+(def categories-dir (fs/create-dirs (fs/file out-dir "category")))
+
+(doseq [[category posts] posts-by-category
+        :let [category-slug (str/replace category #"[^A-z0-9]" "-")]]
+  (spit (fs/file categories-dir (str category-slug ".html"))
+        (selmer/render base-html
+                       {:skip-archive true
+                        :title (str blog-title " - Category - " category)
+                        :relative-path "../"
+                        :body (hiccup/html (category-links category posts))})))
+
 ;;;; Generate index page with last 3 posts
 
 (defn index []
