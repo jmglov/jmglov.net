@@ -82,3 +82,7 @@
  :file "2022-07-05-hacking-blog-favicon.md"
  :categories #{"clojure" "blog"}
  :date "2022-07-05"}
+{:title "Hacking the blog: categories"
+ :file "2022-07-06-hacking-blog-categories.md"
+ :categories #{"clojure" "blog"}
+ :date "2022-07-06"}
