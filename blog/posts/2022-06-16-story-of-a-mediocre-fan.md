@@ -20,4 +20,6 @@ You can read "Story of a mediocre fan" over on 7amkickoff:
   1](https://7amkickoff.com/index.php/2022/06/16/story-of-a-mediocre-fan/)
 - [Chapter
   2](https://7amkickoff.com/index.php/2022/06/23/story-of-a-mediocre-fan-chapter-2/)
-- Chapter 3 - coming on Thursday, 30 June
+- [Chapter
+  3](https://7amkickoff.com/index.php/2022/06/30/story-of-a-mediocre-fan-chapter-3/)
+
