@@ -90,7 +90,11 @@
  :file "2022-07-07-story-of-a-mediocre-writer.md"
  :categories #{"arsenal" "writing"}
  :date "2022-07-07"}
-#_{:title "Story of a mediocre fan: chapter 4"
- :file "2022-07-08-story-of-a-mediocre-fan-4.md"
- :categories #{"arsenal" "stories"}
+{:title "A quick check-in"
+ :file "2022-07-08-quick-check-in.md"
+ :categories #{"waffle" "football" "euro-2022"}
  :date "2022-07-08"}
+#_{:title "Story of a mediocre fan: chapter 4"
+ :file "2022-07-09-story-of-a-mediocre-fan-4.md"
+ :categories #{"arsenal" "stories"}
+ :date "2022-07-09"}
