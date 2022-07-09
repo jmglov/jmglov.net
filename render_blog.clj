@@ -1,35 +1,35 @@
-(ns render
+(ns render-blog
   (:require
    [babashka.fs :as fs]
    [clojure.data.xml :as xml]
    [clojure.edn :as edn]
    [clojure.string :as str]
    [hiccup2.core :as hiccup]
-   [highlighter :as h]
-   [markdown.core :as md]
+   [lib]
    [selmer.parser :as selmer]))
 
-(def markdown-options )
+(def blog-dir "blog")
+(def out-dir (fs/file "public" "blog"))
+(def templates-dir (fs/file blog-dir "templates"))
 
 (def blog-title "jmglov's blog")
 
-(def posts (sort-by :date (comp - compare)
-                    (edn/read-string (format "[%s]"
-                                             (slurp "posts.edn")))))
+(def posts (->> (slurp (fs/file blog-dir "posts.edn"))
+                (format "[%s]")
+                edn/read-string
+                (sort-by :date (comp - compare))))
 
-(def out-dir "public")
-
-(def base-html
-  (slurp "templates/base.html"))
+(def base-html (slurp (fs/file templates-dir "base.html")))
 
 ;;;; Sync images and CSS
 
 (def asset-dir (fs/create-dirs (fs/file out-dir "assets")))
 
-(fs/copy-tree "assets" asset-dir {:replace-existing true})
+(fs/copy-tree (fs/file blog-dir "assets") asset-dir
+              {:replace-existing true})
 
 (spit (fs/file out-dir "style.css")
-      (slurp "templates/style.css"))
+      (slurp (fs/file templates-dir "style.css")))
 
 ;;;; Generate posts from markdown
 
@@ -39,25 +39,6 @@
 <p>Discuss this post <a href=\"{{discuss}}\">here</a>.</p>
 <p><i>Published: {{date}}</i></p>
 ")
-
-(defn markdown->html [file]
-  (let [_ (println "Processing markdown for file:" (str file))
-        markdown (slurp file)
-        markdown (h/highlight-clojure markdown)
-        ;; make links without markup clickable
-        markdown (str/replace markdown #"http[A-Za-z0-9/:.=#?_-]+([\s])"
-                              (fn [[match ws]]
-                                (format "[%s](%s)%s"
-                                        (str/trim match)
-                                        (str/trim match)
-                                        ws)))
-        ;; allow links with markup over multiple lines
-        markdown (str/replace markdown #"\[[^\]]+\n"
-                              (fn [match]
-                                (str/replace match "\n" "$$RET$$")))
-        html (md/md-to-html-string markdown :reference-links? true)
-        html (str/replace html "$$RET$$" "\n")]
-    html))
 
 ;; re-used when generating atom.xml
 (def bodies (atom {}))
@@ -73,7 +54,7 @@
          :or {discuss discuss-fallback}}
         posts]
   (let [cache-file (fs/file ".work" (html-file file))
-        markdown-file (fs/file "posts" file)
+        markdown-file (fs/file blog-dir "posts" file)
         stale? (seq (fs/modified-since cache-file
                                        [markdown-file
                                         "posts.edn"
@@ -81,7 +62,7 @@
                                         "render.clj"
                                         "highlighter.clj"]))
         body (if stale?
-               (let [body (markdown->html markdown-file)]
+               (let [body (lib/markdown->html markdown-file)]
                  (spit cache-file body)
                  body)
                (slurp cache-file))
