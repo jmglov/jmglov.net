@@ -346,3 +346,45 @@ But here we go, installing Steam on NixOS in 50 simple steps!
     puzzlement as nothing seems to happen. Oh wait! Now the state has changed
     from "uninstalled" to "Update Required".
 50. Realise it's nearly lunchtime and ragequit `steam-tui` and this blog post!
+
+## Update from 2022-07-09
+
+It turns out that I was missing something incredibly simple. Thanks to an
+article entitled "[How to Install Steam on
+NixOS?](https://linuxhint.com/how-to-instal-steam-on-nixos/)", I realised that
+the Steam module that I installed by adding `programs.steam.enable = true;` to
+my `/etc/nixos/configuration.nix` installed the `steam` executable, which is the
+official Steam client for Linux. Starting that (from my home directory, as I
+discovered in steps 19-36) updated the client to the latest version, then I
+could browse to my library and install Civ V. Hurrah!
+
+![Screenshot of my Steam library, with Civ V finally downloading][steam]
+
+There was of course one last hurdle before I could actually play. When I clicked
+the play button, nothing seemed to happen, until I looked at the terminal window
+where I had run `steam` and saw some helpful errors:
+
+```
+/bin/sh\0-c\0/home/jmglov/.local/share/Steam/ubuntu12_32/reaper SteamLaunch AppId=8930 -- '/home/jmglov/.local/share/Steam/steamapps/common/Sid Meier'\''s Civilization V/./Civ5XP'\0
+Game process added : AppID 8930 "/home/jmglov/.local/share/Steam/ubuntu12_32/reaper SteamLaunch AppId=8930 -- '/home/jmglov/.local/share/Steam/steamapps/common/Sid Meier'\''s Civilization V/./Civ5XP'", ProcID 600547, IP 0.0.0.0:0
+SpawnProcessInternal: chdir /home/jmglov/.local/share/Steam/steamapps/common/Sid Meier's Civilization V failed, errno 2
+```
+
+It turned out that there was both a `~/.local/share/Steam/steamapps` and
+a `~/.local/share/Steam/Steamapps` directory, and of course the Steam client was
+looking in little-s `steamapps`, and Civ V was installed in big-S `Steamapps`.
+🤦🏼
+
+Ah well, easy enough to fix:
+
+```
+cd ~/.local/share/Steam/steamapps/common
+ln -s ../../Steamapps/common/Sid\ Meier\'s\ Civilization\ V
+```
+
+And Robert is indeed your mother's brother.
+
+![Screenshot of the Civ V opening screen, playing as Darius I of Persia][civ]
+
+[steam]: assets/2022-07-09-steam-library.png "Let's get it on!" width=800px
+[civ]: assets/2022-07-09-civ-v.png "Civilise this!" width=800px
