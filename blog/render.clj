@@ -9,6 +9,8 @@
    [markdown.core :as md]
    [selmer.parser :as selmer]))
 
+(def markdown-options )
+
 (def blog-title "jmglov's blog")
 
 (def posts (sort-by :date (comp - compare)
@@ -53,7 +55,7 @@
         markdown (str/replace markdown #"\[[^\]]+\n"
                               (fn [match]
                                 (str/replace match "\n" "$$RET$$")))
-        html (md/md-to-html-string markdown)
+        html (md/md-to-html-string markdown :reference-links? true)
         html (str/replace html "$$RET$$" "\n")]
     html))
 
