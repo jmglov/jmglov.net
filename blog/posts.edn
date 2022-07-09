@@ -94,7 +94,7 @@
  :file "2022-07-08-quick-check-in.md"
  :categories #{"waffle" "football" "euro-2022"}
  :date "2022-07-08"}
-#_{:title "Story of a mediocre fan: chapter 4"
+{:title "Story of a mediocre fan: chapter 4"
  :file "2022-07-09-story-of-a-mediocre-fan-4.md"
  :categories #{"arsenal" "stories"}
  :date "2022-07-09"}

@@ -22,4 +22,5 @@ You can read "Story of a mediocre fan" over on 7amkickoff:
   2](https://7amkickoff.com/index.php/2022/06/23/story-of-a-mediocre-fan-chapter-2/)
 - [Chapter
   3](https://7amkickoff.com/index.php/2022/06/30/story-of-a-mediocre-fan-chapter-3/)
-
+- [Chapter
+  4](https://7amkickoff.com/index.php/2022/07/09/story-of-a-mediocre-fan-chapter-4/)
