@@ -8,11 +8,19 @@
    [lib]
    [selmer.parser :as selmer]))
 
-(def blog-dir "blog")
+(def blog-dir (fs/file "blog"))
 (def out-dir (fs/file "public" "blog"))
 (def templates-dir (fs/file blog-dir "templates"))
+(def work-dir (fs/file ".work"))
+
+(def stale-check-files
+  (concat [*file*]
+          (->> ["posts.edn"
+                "templates"]
+               (map (partial fs/file blog-dir)))))
 
 (def blog-title "jmglov's blog")
+(def discuss-fallback "https://github.com/jmglov/jmglov.net/discussions/categories/posts")
 
 (def posts (->> (slurp (fs/file blog-dir "posts.edn"))
                 (format "[%s]")
@@ -33,60 +41,23 @@
 
 ;;;; Generate posts from markdown
 
-(def post-template
-  "<h1>{{title}}</h1>
-{{body | safe }}
-<p>Discuss this post <a href=\"{{discuss}}\">here</a>.</p>
-<p><i>Published: {{date}}</i></p>
-")
+(def post-template (slurp (fs/file templates-dir "post.html")))
 
 ;; re-used when generating atom.xml
 (def bodies (atom {}))
 
-(defn html-file [file]
-  (str/replace file ".md" ".html"))
+(fs/create-dirs work-dir)
 
-(fs/create-dirs (fs/file ".work"))
-
-(def discuss-fallback "https://github.com/jmglov/jmglov.net/discussions/categories/posts")
-
-(doseq [{:keys [file title date legacy discuss]
-         :or {discuss discuss-fallback}}
-        posts]
-  (let [cache-file (fs/file ".work" (html-file file))
-        markdown-file (fs/file blog-dir "posts" file)
-        stale? (seq (fs/modified-since cache-file
-                                       [markdown-file
-                                        "posts.edn"
-                                        "templates"
-                                        "render.clj"
-                                        "highlighter.clj"]))
-        body (if stale?
-               (let [body (lib/markdown->html markdown-file)]
-                 (spit cache-file body)
-                 body)
-               (slurp cache-file))
-        _ (swap! bodies assoc file body)
-        body (selmer/render post-template {:body body
-                                           :title title
-                                           :date date
-                                           :discuss discuss})
-        html (selmer/render base-html
-                            {:title title
-                             :body body})
-        html-file (str/replace file ".md" ".html")]
-    (spit (fs/file out-dir html-file) html)
-    (let [legacy-dir (fs/file out-dir (str/replace date "-" "/")
-                              (str/replace file ".md" "")
-                              )]
-      (when legacy
-        (fs/create-dirs legacy-dir)
-        (let [redirect-html (selmer/render"
-<html><head>
-<meta http-equiv=\"refresh\" content=\"0; URL=/{{new_url}}\" />
-</head></html>"
-                                          {:new_url html-file})]
-          (spit (fs/file (fs/file legacy-dir "index.html")) redirect-html))))))
+(doseq [post posts]
+  (lib/write-post! {:base-html base-html
+                    :bodies bodies
+                    :discuss-fallback discuss-fallback
+                    :out-dir out-dir
+                    :post-template post-template
+                    :posts-dir (fs/file blog-dir "posts")
+                    :stale-check-files stale-check-files
+                    :work-dir ".work"}
+                   post))
 
 ;;;; Generate archive page
 
@@ -108,20 +79,20 @@
                       :title (str blog-title " - Archive")
                       :body (hiccup/html (post-links))}))
 
-;;;; Generate category pages
+;;;; Generate tag pages
 
-(def posts-by-category
+(def posts-by-tag
   (->> posts
        (sort-by :date)
-       (mapcat (fn [{:keys [categories] :as post}]
-                 (map (fn [category] [category post]) categories)))
-       (reduce (fn [acc [category post]]
-                 (update acc category #(conj % post)))
+       (mapcat (fn [{:keys [tags] :as post}]
+                 (map (fn [tag] [tag post]) tags)))
+       (reduce (fn [acc [tag post]]
+                 (update acc tag #(conj % post)))
                {})))
 
-(defn category-links [category posts]
+(defn tag-links [tag posts]
   [:div {:style "width: 600px;"}
-   [:h1 (str "Category - " category)]
+   [:h1 (str "Tag - " tag)]
    [:ul.index
     (for [{:keys [file title date preview]} posts
           :when (not preview)]
@@ -131,16 +102,18 @@
             " - "
             date]])]])
 
-(def categories-dir (fs/create-dirs (fs/file out-dir "category")))
+(def tags-dir (fs/create-dirs (fs/file out-dir "tags")))
 
-(doseq [[category posts] posts-by-category
-        :let [category-slug (str/replace category #"[^A-z0-9]" "-")]]
-  (spit (fs/file categories-dir (str category-slug ".html"))
+(doseq [[tag posts] posts-by-tag
+        :let [tag-slug (str/replace tag #"[^A-z0-9]" "-")
+              tag-file (fs/file tags-dir (str tag-slug ".html"))]]
+  (println "Writing tag file:" (.getName tag-file))
+  (spit tag-file
         (selmer/render base-html
                        {:skip-archive true
-                        :title (str blog-title " - Category - " category)
+                        :title (str blog-title " - Tag - " tag)
                         :relative-path "../"
-                        :body (hiccup/html (category-links category posts))})))
+                        :body (hiccup/html (tag-links tag posts))})))
 
 ;;;; Generate index page with last 3 posts
 
@@ -209,7 +182,7 @@
 (spit (fs/file out-dir "planetclojure.xml")
       (atom-feed (filter
                   (fn [post]
-                    (some (:categories post) ["clojure" "clojurescript"]))
+                    (some (:tags post) ["clojure" "clojurescript"]))
                   posts)))
 
 ;; for JVM Clojure:

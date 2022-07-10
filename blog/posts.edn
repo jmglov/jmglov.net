@@ -1,100 +1,100 @@
 {:title "Summertime (and the writing ain’t easy)"
  :file "2022-06-15-summertime.md"
- :categories #{"stories"}
+ :tags #{"stories"}
  :date "2022-06-15"}
 {:title "Story of a mediocre fan"
  :file "2022-06-16-story-of-a-mediocre-fan.md"
- :categories #{"arsenal" "stories"}
+ :tags #{"arsenal" "stories"}
  :date "2022-06-16"}
 {:title "Creating a blog with Clojure in 50 simple steps"
  :file "2022-06-17-creating-a-blog-with-clojure.md"
- :categories #{"clojure" "nix" "50-simple-steps"}
+ :tags #{"clojure" "nix" "50-simple-steps"}
  :date "2022-06-17"}
 {:title "Aberrant poetry"
  :file "2022-06-18-aberrant-poetry.md"
- :categories #{"stories"}
+ :tags #{"stories"}
  :date "2022-06-18"}
 {:title "Actually blogging with Clojure"
  :file "2022-06-19-actually-blogging-with-clojure.md"
- :categories #{"clojure"}
+ :tags #{"clojure"}
  :date "2022-06-19"}
 {:title "Installing Steam on NixOS in 50 simple steps"
  :file "2022-06-20-installing-steam-on-nixos.md"
- :categories #{"nix" "games" "50-simple-steps"}
+ :tags #{"nix" "games" "50-simple-steps"}
  :date "2022-06-20"}
 {:title "The old todo list"
  :file "2022-06-21-todo-list.md"
- :categories #{"clojure" "nix"}
+ :tags #{"clojure" "nix"}
  :date "2022-06-21"}
 {:title "Those about to rock"
  :file "2022-06-22-about-to-rock.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-06-22"}
 {:title "Story of a mediocre fan: chapter 2"
  :file "2022-06-23-story-of-a-mediocre-fan-2.md"
- :categories #{"arsenal" "stories"}
+ :tags #{"arsenal" "stories"}
  :date "2022-06-23"}
 {:title "Using HTTPS with S3 static website hosting in 50 simple steps"
  :file "2022-06-24-s3-https.md"
- :categories #{"aws" "50-simple-steps"}
+ :tags #{"aws" "50-simple-steps"}
  :date "2022-06-24"}
 {:title "Midsommar"
  :file "2022-06-25-midsommar.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-06-25"}
 {:title "Tying off loose ends"
  :file "2022-06-26-loose-ends.md"
- :categories #{"aws" "s3" "lambda" "clojure"}
+ :tags #{"aws" "s3" "lambda" "clojure"}
  :date "2022-06-26"}
 {:title "Tennis, anyone?"
  :file "2022-06-27-tennis-anyone.md"
- :categories #{"tennis"}
+ :tags #{"tennis"}
  :date "2022-06-27"}
 {:title "Hotter than hell... sinki"
  :file "2022-06-28-hotter-than-hellsinki.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-06-28"}
 {:title "Rover's birthday"
  :file "2022-06-29-rovers-birthday.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-06-29"}
 {:title "Story of a mediocre fan: chapter 3"
  :file "2022-06-30-story-of-a-mediocre-fan-3.md"
- :categories #{"arsenal" "stories"}
+ :tags #{"arsenal" "stories"}
  :date "2022-06-30"}
 {:title "The Warsaw Pact"
  :file "2022-07-01-warsaw-pact.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-07-01"}
 {:title "Two simple things"
  :file "2022-07-02-two-simple-things.md"
- :categories #{"waffle"}
+ :tags #{"waffle"}
  :date "2022-07-02"}
 {:title "Blambda!"
  :file "2022-07-03-blambda.md"
- :categories #{"aws" "s3" "lambda" "clojure"}
+ :tags #{"aws" "s3" "lambda" "clojure"}
  :date "2022-07-03"}
 {:title "Dogfooding Blambda! : revenge of the pod people"
  :file "2022-07-04-dogfooding-blambda-1.md"
- :categories #{"aws" "s3" "lambda" "clojure" "blambda"}
+ :tags #{"aws" "s3" "lambda" "clojure" "blambda"}
  :date "2022-07-04"}
 {:title "Hacking the blog: favicon"
  :file "2022-07-05-hacking-blog-favicon.md"
- :categories #{"clojure" "blog"}
+ :tags #{"clojure" "blog"}
  :date "2022-07-05"}
 {:title "Hacking the blog: categories"
  :file "2022-07-06-hacking-blog-categories.md"
- :categories #{"clojure" "blog"}
+ :tags #{"clojure" "blog"}
  :date "2022-07-06"}
 {:title "Story of a mediocre writer"
  :file "2022-07-07-story-of-a-mediocre-writer.md"
- :categories #{"arsenal" "writing"}
+ :tags #{"arsenal" "writing"}
  :date "2022-07-07"}
 {:title "A quick check-in"
  :file "2022-07-08-quick-check-in.md"
- :categories #{"waffle" "football" "euro-2022"}
+ :tags #{"waffle" "football" "euro-2022"}
  :date "2022-07-08"}
 {:title "Story of a mediocre fan: chapter 4"
  :file "2022-07-09-story-of-a-mediocre-fan-4.md"
- :categories #{"arsenal" "stories"}
+ :tags #{"arsenal" "stories"}
  :date "2022-07-09"}

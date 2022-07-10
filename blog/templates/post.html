@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+{{body | safe }}
+<p>Discuss this post <a href="{{discuss}}">here</a>.</p>
+<p><i>Published: {{date}}</i></p>
+<p>
+    Tags:
+    {% for tag in tags %}
+    <span class="tag">
+        <a href="tags/{{ tag }}.html">{{ tag }}</a>
+    </span>
+    {% endfor %}
+</p>
