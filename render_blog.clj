@@ -14,7 +14,7 @@
 (def work-dir (fs/file ".work"))
 
 (def stale-check-files
-  (concat [*file*]
+  (concat ["render_blog.clj"]
           (->> ["posts.edn"
                 "templates"]
                (map (partial fs/file blog-dir)))))
@@ -61,59 +61,32 @@
 
 ;;;; Generate archive page
 
-(defn post-links []
-  [:div {:style "width: 600px;"}
-   [:h1 "Archive"]
-   [:ul.index
-    (for [{:keys [file title date preview]} posts
-          :when (not preview)]
-      [:li [:span
-            [:a {:href (str/replace file ".md" ".html")}
-             title]
-            " - "
-            date]])]])
-
+(println "Writing archive page")
 (spit (fs/file out-dir "archive.html")
       (selmer/render base-html
                      {:skip-archive true
                       :title (str blog-title " - Archive")
-                      :body (hiccup/html (post-links))}))
+                      :body (hiccup/html (lib/post-links "Archive" posts))}))
 
 ;;;; Generate tag pages
 
-(def posts-by-tag
-  (->> posts
-       (sort-by :date)
-       (mapcat (fn [{:keys [tags] :as post}]
-                 (map (fn [tag] [tag post]) tags)))
-       (reduce (fn [acc [tag post]]
-                 (update acc tag #(conj % post)))
-               {})))
-
-(defn tag-links [tag posts]
-  [:div {:style "width: 600px;"}
-   [:h1 (str "Tag - " tag)]
-   [:ul.index
-    (for [{:keys [file title date preview]} posts
-          :when (not preview)]
-      [:li [:span
-            [:a {:href (str "../" (str/replace file ".md" ".html"))}
-             title]
-            " - "
-            date]])]])
+(def posts-by-tag (lib/posts-by-tag posts))
 
 (def tags-dir (fs/create-dirs (fs/file out-dir "tags")))
 
-(doseq [[tag posts] posts-by-tag
-        :let [tag-slug (str/replace tag #"[^A-z0-9]" "-")
-              tag-file (fs/file tags-dir (str tag-slug ".html"))]]
-  (println "Writing tag file:" (.getName tag-file))
-  (spit tag-file
-        (selmer/render base-html
-                       {:skip-archive true
-                        :title (str blog-title " - Tag - " tag)
-                        :relative-path "../"
-                        :body (hiccup/html (tag-links tag posts))})))
+(println "Writing tags page")
+(spit (fs/file tags-dir "index.html")
+      (selmer/render base-html
+                     {:skip-archive true
+                      :title (str blog-title " - Tags")
+                      :relative-path "../"
+                      :body (hiccup/html (lib/tag-links "Tags" posts-by-tag))}))
+
+(doseq [tag-and-posts posts-by-tag]
+  (lib/write-tag! {:base-html base-html
+                   :blog-title blog-title
+                   :tags-dir tags-dir}
+                  tag-and-posts))
 
 ;;;; Generate index page with last 3 posts
 

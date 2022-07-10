@@ -2,6 +2,7 @@
   (:require
    [babashka.fs :as fs]
    [clojure.string :as str]
+   [hiccup2.core :as hiccup]
    [highlighter :as h]
    [markdown.core :as md]
    [selmer.parser :as selmer]))
@@ -28,6 +29,38 @@
 (defn html-file [file]
   (str/replace file ".md" ".html"))
 
+(defn posts-by-tag [posts]
+  (->> posts
+       (sort-by :date)
+       (mapcat (fn [{:keys [tags] :as post}]
+                 (map (fn [tag] [tag post]) tags)))
+       (reduce (fn [acc [tag post]]
+                 (update acc tag #(conj % post)))
+               {})))
+
+(defn post-links [title posts]
+  [:div {:style "width: 600px;"}
+   [:h1 title]
+   [:ul.index
+    (for [{:keys [file title date preview]} posts
+          :when (not preview)]
+      [:li [:span
+            [:a {:href (str "../" (str/replace file ".md" ".html"))}
+             title]
+            " - "
+            date]])]])
+
+(defn tag-links [title tags]
+  [:div {:style "width: 600px;"}
+   [:h1 title]
+   [:ul.index
+    (for [[tag posts] tags]
+      [:li [:span
+            [:a {:href (str tag ".html")} tag]
+            " - "
+            (count posts)
+            " posts"]])]])
+
 (defn write-post! [{:keys [base-html
                            bodies
                            discuss-fallback
@@ -41,7 +74,7 @@
   (let [cache-file (fs/file work-dir (html-file file))
         markdown-file (fs/file posts-dir file)
         stale-check-files (concat stale-check-files
-                                  [*file* "highlighter.clj"])
+                                  ["lib.clj" "highlighter.clj"])
         stale? (seq (fs/modified-since cache-file stale-check-files))
         body (if stale?
                (let [body (markdown->html markdown-file)]
@@ -70,3 +103,17 @@
 </head></html>"
                                           {:new_url html-file})]
           (spit (fs/file (fs/file legacy-dir "index.html")) redirect-html))))))
+
+(defn write-tag! [{:keys [base-html
+                          blog-title
+                          tags-dir]}
+                  [tag posts]]
+  (let [tag-slug (str/replace tag #"[^A-z0-9]" "-")
+        tag-file (fs/file tags-dir (str tag-slug ".html"))]
+    (println "Writing tag page:" (.getName tag-file))
+    (spit tag-file
+          (selmer/render base-html
+                         {:skip-archive true
+                          :title (str blog-title " - Tag - " tag)
+                          :relative-path "../"
+                          :body (hiccup/html (post-links (str "Tag - " tag) posts))}))))
