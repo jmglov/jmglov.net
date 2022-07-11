@@ -1,11 +1,5 @@
-I'm a software engineer living in Stockholm. Here's how to find me:
-
-![LinkedIn](assets/linkedin-30px.png)
-**[joshglover](https://www.linkedin.com/in/joshglover)**
-
-![Github](assets/github-30px.png) **[jmglov](https://github.com/jmglov)**
-
-![Twitter](assets/twitter-30px.png) **[jmglov](https://twitter.com/jmglov)**
+I'm a software engineer turned engineering manager living in Stockholm. Here's
+how to find me:
 
 ## Info for Recruiters
 

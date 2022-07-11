@@ -120,20 +120,22 @@
   (let [out-file (fs/file out-dir (html-file file))
         markdown-file (fs/file posts-dir file)
         rendering-system-files (concat rendering-system-files
-                                       ["lib.clj" "highlighter.clj"])]
+                                       ["lib.clj" "highlighter.clj"])
+        ;; We need to build the body regardless of whether the file is
+        ;; stale because it's used in the index page and RSS feed. This
+        ;; really needs to be cleaned up.
+        body (markdown->html markdown-file)
+        _ (swap! bodies assoc file body)]
     (when (or (rendering-modified? rendering-system-files out-file)
               (stale? markdown-file out-file))
-      (let [body (markdown->html markdown-file)
-            _ (swap! bodies assoc file body)
-            body (selmer/render post-template {:body body
+      (let [body (selmer/render post-template {:body body
                                                :title title
                                                :date date
                                                :discuss discuss
                                                :tags tags})
             html (render-page config base-html
                               {:title title
-                               :body body
-                               #_:summary #_(-> (slurp markdown-file) (subs 0 280))})]
+                               :body body})]
         (println "Writing post:" (str out-file))
         (spit out-file html)
         (let [legacy-dir (fs/file out-dir

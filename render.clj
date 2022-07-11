@@ -11,52 +11,57 @@
 
 (def maria-src-base-url "raw.githubusercontent.com/jmglov/jmglov.net/main/")
 
+(def out-dir (fs/file "public"))
+
+(def templates-dir (fs/file "templates"))
+(def base-template (fs/file templates-dir "base.html"))
+
+(def rendering-system-files
+  ["lib.clj" templates-dir])
+
 (def files (->> "files.edn"
                 slurp
                 (format "[%s]")
                 edn/read-string
                 (map (partial maria/mariafy maria-src-base-url))))
 
-(def out-dir "public")
-
-(def base-template "templates/base.html")
-
 ;;;; Sync images and CSS
 
 (def asset-dir (fs/create-dirs (fs/file out-dir "assets")))
 
-(fs/copy-tree "assets" asset-dir {:replace-existing true})
+(lib/copy-tree-modified (fs/file "assets")
+                        asset-dir
+                        (.getParent out-dir))
 
-(spit (fs/file out-dir "style.css")
-      (slurp "templates/style.css"))
+(let [style-src (fs/file templates-dir "style.css")
+      style-target (fs/file out-dir "style.css")]
+  (lib/copy-modified style-src style-target))
 
 ;;;; Sync favicon
 
 (def favicon-dir (fs/create-dirs (fs/file out-dir)))
 
-(fs/copy-tree "favicon" favicon-dir {:replace-existing true})
+(doseq [file (fs/glob "favicon" "**")
+        :let [outfile (fs/file favicon-dir (.getFileName file))]]
+  (when (lib/stale? file outfile)
+    (println "Writing favicon file:" (str outfile))))
 
-;;;; Generate posts from markdown
-
-(defn html-file [file]
-  (str/replace file ".md" ".html"))
-
-(fs/create-dirs (fs/file ".work"))
+;;;; Generate pages from markdown
 
 (doseq [{:keys [file dir title context-map template]} files]
-  (let [_ (when dir
-            (fs/create-dirs (format ".work/%s" dir))
-            (fs/create-dirs (format "%s/%s" out-dir dir)))
-        cache-file (fs/file ".work" (html-file file))
-        markdown-file (fs/file file)
-        body (let [body (lib/markdown->html markdown-file)]
-               (spit cache-file body)
-               body)
-        html (selmer/render (slurp (or template base-template))
-                            (merge context-map {:title title
-                                                :body body}))
-        html-file (str/replace file ".md" ".html")]
-    (spit (fs/file out-dir html-file) html)))
+  (when dir
+    (fs/create-dirs (format "%s/%s" out-dir dir)))
+  (let [out-file (fs/file out-dir (lib/html-file file))
+        markdown-file (fs/file file)]
+    (when (or
+           (lib/rendering-modified? rendering-system-files out-file)
+           (lib/stale? markdown-file out-file))
+      (let [body (lib/markdown->html markdown-file)]
+        (println "Writing page:" (str out-file))
+        (spit out-file
+              (selmer/render (slurp (or template base-template))
+                             (merge context-map {:title title
+                                                 :body body})))))))
 
 ;; for JVM Clojure:
 (defn -main [& _args]

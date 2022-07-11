@@ -13,8 +13,6 @@
 (def blog-root "http://jmglov.net/blog/")
 (def discuss-fallback "https://github.com/jmglov/jmglov.net/discussions/categories/posts")
 
-(def posts-file "posts.edn")
-
 (def blog-dir (fs/file "blog"))
 (def out-dir (fs/file "public" "blog"))
 (def templates-dir (fs/file blog-dir "templates"))
@@ -23,7 +21,9 @@
   [(fs/file ".." "templates")
    templates-dir])
 
-(def posts (->> (slurp (fs/file blog-dir posts-file))
+(def posts-file (fs/file blog-dir "posts.edn"))
+
+(def posts (->> (slurp posts-file)
                 (format "[%s]")
                 edn/read-string
                 (sort-by :date (comp - compare))))
