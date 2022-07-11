@@ -1,0 +1,30 @@
+<!-- Social media sharing metadata; courtesy of: -->
+<!-- https://dev.to/mishmanners/how-to-add-a-social-media-share-card-to-any-website-ha8 -->
+<!-- https://nickcarmont8.medium.com/how-to-add-a-website-thumbnail-for-sharing-your-html-site-on-social-media-facebook-linkedin-12813f8d2618 -->
+
+<!-- Default metadata which all websites can use -->
+<meta name="title" content="{{title}}">
+
+{% if summary %}
+<meta name="description" content="{{summary}}">
+<meta property="og:description" content="{{summary}}">
+<meta property="twitter:description" content="{{summary}}">
+{% endif %}
+
+{% if url %}
+<meta property="og:url" content="{{url}}">
+<meta property="twitter:url" content="{{url}}">
+{% endif %}
+
+{% if image-url %}
+<meta property="og:image" content="{{image-url}}">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="{{image-url}}">
+{% endif %}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+
+<!-- Twitter -->
+<meta property="twitter:title" content="{{title}}">

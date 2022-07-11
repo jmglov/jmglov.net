@@ -5,7 +5,47 @@
    [hiccup2.core :as hiccup]
    [highlighter :as h]
    [markdown.core :as md]
-   [selmer.parser :as selmer]))
+   [selmer.parser :as selmer])
+  (:import (java.time.format DateTimeFormatter)))
+
+(defn rendering-modified? [rendering-system-files target-file]
+  (seq (fs/modified-since target-file rendering-system-files)))
+
+(defn stale? [src target]
+  (seq (fs/modified-since target src)))
+
+(defn copy-modified [src target]
+  (when (stale? src target)
+    (println "Writing" (str target))
+    (fs/create-dirs (.getParent (fs/file target)))
+    (fs/copy src target)))
+
+(defn copy-tree-modified [src-dir target-dir out-dir]
+  (let [modified-paths (fs/modified-since (fs/file target-dir)
+                                          (fs/file src-dir))
+        new-paths (->> (fs/glob src-dir "**")
+                       (remove #(fs/exists? (fs/file out-dir %))))]
+    (doseq [path (concat modified-paths new-paths)
+            :let [target-path (fs/file out-dir path)]]
+      (fs/create-dirs (.getParent target-path))
+      (println "Writing" (str target-path))
+      (fs/copy (fs/file path) target-path))))
+
+(defn rfc-3339-now []
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (java.time.ZonedDateTime/now java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
+(defn rfc-3339 [yyyy-MM-dd]
+  (let [in-fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd")
+        local-date (java.time.LocalDate/parse yyyy-MM-dd in-fmt)
+        fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (java.time.ZonedDateTime/of (.atTime local-date 23 59 59)
+                                        java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
+(defn html-file [file]
+  (str/replace file ".md" ".html"))
 
 (defn markdown->html [file]
   (let [_ (println "Processing markdown for file:" (str file))
@@ -26,9 +66,6 @@
         html (str/replace html "$$RET$$" "\n")]
     html))
 
-(defn html-file [file]
-  (str/replace file ".md" ".html"))
-
 (defn posts-by-tag [posts]
   (->> posts
        (sort-by :date)
@@ -38,17 +75,26 @@
                  (update acc tag #(conj % post)))
                {})))
 
-(defn post-links [title posts]
+(defn post-links [{:keys [relative-path]} title posts]
   [:div {:style "width: 600px;"}
    [:h1 title]
    [:ul.index
     (for [{:keys [file title date preview]} posts
           :when (not preview)]
       [:li [:span
-            [:a {:href (str "../" (str/replace file ".md" ".html"))}
+            [:a {:href (str relative-path (str/replace file ".md" ".html"))}
              title]
             " - "
             date]])]])
+
+(defn render-page [{:keys [outfile sharing-template] :as config}
+                   template template-vars]
+  (let [sharing-metadata (when sharing-template
+                           (selmer/render (slurp sharing-template)
+                                          template-vars))]
+    (selmer/render template
+                   (merge template-vars
+                          {:sharing-metadata sharing-metadata}))))
 
 (defn tag-links [title tags]
   [:div {:style "width: 600px;"}
@@ -67,53 +113,45 @@
                            out-dir
                            post-template
                            posts-dir
-                           stale-check-files
-                           work-dir]}
-                   {:keys [file title date legacy discuss tags]
+                           rendering-system-files]
+                    :as config}
+                   {:keys [file title date discuss tags]
                     :or {discuss discuss-fallback}}]
-  (let [cache-file (fs/file work-dir (html-file file))
+  (let [out-file (fs/file out-dir (html-file file))
         markdown-file (fs/file posts-dir file)
-        stale-check-files (concat stale-check-files
-                                  ["lib.clj" "highlighter.clj"])
-        stale? (seq (fs/modified-since cache-file stale-check-files))
-        body (if stale?
-               (let [body (markdown->html markdown-file)]
-                 (spit cache-file body)
-                 body)
-               (slurp cache-file))
-        _ (swap! bodies assoc file body)
-        body (selmer/render post-template {:body body
-                                           :title title
-                                           :date date
-                                           :discuss discuss
-                                           :tags tags})
-        html (selmer/render base-html
-                            {:title title
-                             :body body})
-        html-file (str/replace file ".md" ".html")]
-    (spit (fs/file out-dir html-file) html)
-    (let [legacy-dir (fs/file out-dir
-                              (str/replace date "-" "/")
-                              (str/replace file ".md" ""))]
-      (when legacy
-        (fs/create-dirs legacy-dir)
-        (let [redirect-html (selmer/render"
-<html><head>
-<meta http-equiv=\"refresh\" content=\"0; URL=/{{new_url}}\" />
-</head></html>"
-                                          {:new_url html-file})]
-          (spit (fs/file (fs/file legacy-dir "index.html")) redirect-html))))))
+        rendering-system-files (concat rendering-system-files
+                                       ["lib.clj" "highlighter.clj"])]
+    (when (or (rendering-modified? rendering-system-files out-file)
+              (stale? markdown-file out-file))
+      (let [body (markdown->html markdown-file)
+            _ (swap! bodies assoc file body)
+            body (selmer/render post-template {:body body
+                                               :title title
+                                               :date date
+                                               :discuss discuss
+                                               :tags tags})
+            html (render-page config base-html
+                              {:title title
+                               :body body
+                               #_:summary #_(-> (slurp markdown-file) (subs 0 280))})]
+        (println "Writing post:" (str out-file))
+        (spit out-file html)
+        (let [legacy-dir (fs/file out-dir
+                                  (str/replace date "-" "/")
+                                  (str/replace file ".md" ""))])))))
 
 (defn write-tag! [{:keys [base-html
                           blog-title
-                          tags-dir]}
+                          tags-dir]
+                   :as config}
                   [tag posts]]
   (let [tag-slug (str/replace tag #"[^A-z0-9]" "-")
         tag-file (fs/file tags-dir (str tag-slug ".html"))]
-    (println "Writing tag page:" (.getName tag-file))
+    (println "Writing tag page:" (str tag-file))
     (spit tag-file
-          (selmer/render base-html
-                         {:skip-archive true
-                          :title (str blog-title " - Tag - " tag)
-                          :relative-path "../"
-                          :body (hiccup/html (post-links (str "Tag - " tag) posts))}))))
+          (render-page config base-html
+                       {:skip-archive true
+                        :title (str blog-title " - Tag - " tag)
+                        :relative-path "../"
+                        :body (hiccup/html (lib/post-links {:relative-path "../"}
+                                                           (str "Tag - " tag) posts))}))))
