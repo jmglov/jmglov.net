@@ -1,3 +1,7 @@
+Title: Midsommar
+Tags: waffle
+Date: 2022-06-25
+
 [![Midsommar film poster](assets/midsommar.png "By A24, Fair use, Wikipedia")](https://en.wikipedia.org/w/index.php?curid=60104242)
 
 Midsommar in Sweden means four things:

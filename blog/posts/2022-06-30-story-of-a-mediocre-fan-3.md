@@ -1,3 +1,7 @@
+Title: Story of a mediocre fan: chapter 3
+Tags: arsenal,stories
+Date: 2022-06-30
+
 It's Thursday in Stockholm, and I have some good news and some bad news for you,
 which I shall interleave in the following several bullet points:
 - Good news: as [the damned Norwegians

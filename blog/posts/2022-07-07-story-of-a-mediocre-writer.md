@@ -1,3 +1,7 @@
+Title: Story of a mediocre writer
+Tags: arsenal,writing
+Date: 2022-07-07
+
 The final chapter of "[Story of a mediocre
 fan](2022-06-16-story-of-a-mediocre-fan.html)" was supposed to go out today, but
 I ran into an age old issue discovered by Blaise Pascal in 1657, when he

@@ -1,3 +1,7 @@
+Title: Those about to rock
+Tags: waffle
+Date: 2022-06-22
+
 I'm getting toward the end of another eventful day. I woke up around 8:00, which
 is quite an achievment for me, since the sun is currently rising here in Sweden
 at 3:30 AM and my bedroom window faces almost directly northeast. I usually wake

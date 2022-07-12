@@ -1,3 +1,7 @@
+Title: Hacking the blog: categories
+Tags: clojure,blog,babashka
+Date: 2022-07-06
+
 Today's post is coming pretty late in the day due to me spending a few hours
 working on the final chapter of "[Story of a mediocre
 fan](2022-06-16-story-of-a-mediocre-fan.html)" (not quite finished, but I'll

@@ -1,3 +1,7 @@
+Title: The Warsaw Pact
+Tags: waffle
+Date: 2022-07-01
+
 I should be driving back from the airport right now, having retrieved my wife
 and son after their trip to Bulgaria. What I am doing instead is writing a blog
 entry, which of course I would have done earlier if they weren't currently

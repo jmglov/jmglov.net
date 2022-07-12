@@ -1,3 +1,7 @@
+Title: Creating a blog with Clojure in 50 simple steps
+Tags: clojure,50-simple-steps,babashka,nix,blog
+Date: 2022-06-17
+
 1. Install [NixOS](https://nixos.org/) on your laptop because it’s super cool
    but also because you hate yourself just a little.
 2. Come up with the idea of writing something every day this summer and

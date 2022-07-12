@@ -1,3 +1,7 @@
+Title: Hotter than hell... sinki
+Tags: waffle
+Date: 2022-06-28
+
 It's Tuesday, and I have a litany of complaints. First and most importantly,
 it's hotter than hell... sinki here in Stockholm! Look, I'll show you:
 

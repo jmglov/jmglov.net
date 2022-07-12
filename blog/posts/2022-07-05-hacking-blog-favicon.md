@@ -1,3 +1,7 @@
+Title: Hacking the blog: favicon
+Tags: clojure,blog,babashka
+Date: 2022-07-05
+
 The fun thing about having a blog which is built with a [static site
 generator](https://github.com/jmglov/jmglov.net) is that you get to ~~waste~~
 spend time customising it. In today's instalment of "Hacking the blog", we'll

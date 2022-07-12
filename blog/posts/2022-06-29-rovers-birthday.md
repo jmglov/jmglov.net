@@ -1,3 +1,7 @@
+Title: Rover's birthday
+Tags: waffle
+Date: 2022-06-29
+
 Yesterday was a very special day for the best boy in the whole wide world: my
 dog Rover turned 9! We celebrated with the following lovely "cake", which I made
 by frosting half of a hamburger bun with liver pâté (the cheap supermarket kind,

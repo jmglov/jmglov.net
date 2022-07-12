@@ -1,3 +1,7 @@
+Title: Dogfooding Blambda! : revenge of the pod people
+Tags: clojure,aws,blambda,s3,babashka,lambda
+Date: 2022-07-04
+
 Today I finally tried to use [Blambda!](https://github.com/jmglov/blambda) for
 something real: a log parser for my HTTP access logs that S3 and Cloudfront
 write to [my logs bucket](2022-06-24-s3-https.html). You can follow along with

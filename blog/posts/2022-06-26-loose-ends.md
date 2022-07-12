@@ -1,3 +1,7 @@
+Title: Tying off loose ends
+Tags: clojure,aws,s3,babashka,lambda
+Date: 2022-06-26
+
 I have been working my way through the [old todo
 list](2022-06-21-todo-list.html) in the five days since I wrote it, and I wanted
 to give you an update.

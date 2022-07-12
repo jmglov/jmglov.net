@@ -1,3 +1,7 @@
+Title: Summertime (and the writing ain’t easy)
+Tags: stories
+Date: 2022-06-15
+
 As far back as I can remember, I always wanted to be a writer. To me, being a
 writer was better than being President of the United States. Even before I first
 wandered into the library for my first Hardy Boys paperback, I knew I wanted to

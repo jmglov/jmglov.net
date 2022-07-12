@@ -1,3 +1,7 @@
+Title: Story of a mediocre fan: chapter 2
+Tags: arsenal,stories
+Date: 2022-06-23
+
 I finished up chapter 2 of "Story of a mediocre fan" yesterday, but wasn't 100%
 sure that Tim was planning to post it today, so I figured that I'd better write
 a piece for today just in case, because it would be terrible to break my streak

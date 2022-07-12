@@ -1,3 +1,7 @@
+Title: Hands off women's football
+Tags: football,euro2022
+Date: 2022-07-10
+
 The [Women's Euro 2022](https://www.uefa.com/womenseuro/) has served up some
 great action so far. On opening night, an incredibly organised and hard-working
 Austria held the mighty England to a single goal. We've seen Norway, Spain, and

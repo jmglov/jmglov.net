@@ -1,3 +1,7 @@
+Title: Hacking the blog: caching
+Tags: clojure,blog,babashka
+Date: 2022-07-11
+
 Well, it had to come to this, didn't it? At some point in the life of every
 programmer, you have to take a deep sigh, realise that you have a problem where
 caching is the least bad solution, and get to it. That point in my life was
@@ -193,3 +197,5 @@ If you're interested in seeing this in action, take a look at
 [`render_blog.clj`](https://github.com/jmglov/jmglov.net/blob/main/render_blog.clj)
 and [`lib.clj`](https://github.com/jmglov/jmglov.net/blob/main/lib.clj). Just
 note that things are not very polished, and there are likely to be bugs. 😬
+
+**Need to add fixes.**

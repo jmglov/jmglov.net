@@ -1,3 +1,7 @@
+Title: Installing Steam on NixOS in 50 simple steps
+Tags: 50-simple-steps,games,nix
+Date: 2022-06-20
+
 I just dropped my partner and my son off at the airport, so the dog and I are on
 our own for the next 10 days. This will give me plenty of time to do some
 reading (finishing up "[Foundation and

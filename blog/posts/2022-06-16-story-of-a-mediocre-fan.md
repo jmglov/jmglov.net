@@ -1,3 +1,7 @@
+Title: Story of a mediocre fan
+Tags: arsenal,stories
+Date: 2022-06-16
+
 The winter before I moved to Sweden (2009-2010), Arsenal launched Arsenal
 Player, and gave Red members access to watch all matches online the next day.
 This included not only Premier League matches, but also League Cup, FA Cup, and

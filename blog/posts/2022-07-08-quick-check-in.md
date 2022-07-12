@@ -1,3 +1,7 @@
+Title: A quick check-in
+Tags: football,euro-2022,waffle
+Date: 2022-07-08
+
 I started the day off with a nice game of tennis with my friend Joanna, then sat
 down at my desk and reworked the final chapter of "[Story of a mediocre
 fan](2022-06-16-story-of-a-mediocre-fan.html)", which should go out tomorrow.

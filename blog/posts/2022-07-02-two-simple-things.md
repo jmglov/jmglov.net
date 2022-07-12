@@ -1,3 +1,7 @@
+Title: Two simple things
+Tags: waffle
+Date: 2022-07-02
+
 A couple of years back, I made two really minor changes that improved my quality
 of life in a major way.
 

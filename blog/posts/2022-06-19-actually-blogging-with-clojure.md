@@ -1,3 +1,7 @@
+Title: Actually blogging with Clojure
+Tags: clojure,babashka,blog
+Date: 2022-06-19
+
 I admit that my previous post on [how to create a blog with
 Clojure](2022-06-17-creating-a-blog-with-clojure.html) may have been slightly
 tongue in cheek. This one will be less so, since I've actually gotten stuff

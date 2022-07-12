@@ -1,3 +1,7 @@
+Title: Tennis, anyone?
+Tags: tennis
+Date: 2022-06-27
+
 I'll make today's post (relatively) short and (hopefully) sweet, as I've spent a
 big chunk of the day working on [Blambda!](https://github.com/jmglov/blambda)
 and I need to actually start writing the third and final chapter of "[Story of a

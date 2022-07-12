@@ -1,3 +1,7 @@
+Title: Story of a mediocre fan: chapter 4
+Tags: arsenal,stories
+Date: 2022-07-09
+
 Today's main story is that the final chapter of "[Story of a mediocre
 fan](https://7amkickoff.com/index.php/2022/07/09/story-of-a-mediocre-fan-chapter-4/)"
 has been published over on 7amkickoff! Four weeks, 18,383 words, countless

@@ -1,3 +1,7 @@
+Title: Aberrant poetry
+Tags: stories
+Date: 2022-06-18
+
 So far this summer, most of the stuff I’ve written has turned out to be stories
 from my childhood, even when that was perhaps not my intention when I started
 typing. [Yesterday’s post](2022-06-17-creating-a-blog-with-clojure.html) broke
