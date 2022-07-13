@@ -106,3 +106,7 @@
  :file "2022-07-11-hacking-blog-caching.md"
  :tags #{"clojure" "blog" "babashka"}
  :date "2022-07-11"}
+{:title "Some stuff I learned today"
+ :file "2022-07-12-stuff-i-learned.md"
+ :tags #{"waffle"}
+ :date "2022-07-12"}
