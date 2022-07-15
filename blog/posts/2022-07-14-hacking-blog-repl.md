@@ -14,7 +14,8 @@ become stale.
 - Static assets (for example, images): the file itself is modified
 - Stylesheet: the file itself is modified
 - Posts: one of the following is modified:
-  - The entry in [`posts.edn`](https://github.com/jmglov/jmglov.net/blob/main/blog/posts.edn),
+  - The entry in
+     [`posts.edn`](https://github.com/jmglov/jmglov.net/blob/575a12cf2a87a4fd2a46dc131ed3a51f864ba57f/blog/posts.edn),
     corresponding to a given post, since that means that some post metadata such
     as title, date, tags, or filename may have changed
   - The Markdown file for a given post

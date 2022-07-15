@@ -35,7 +35,7 @@ something like [`category/aws.html`](category/aws.html).
 
 The first step was to build a data structure which contains all of the posts for
 each category. The post metadata lives in
-[`posts.edn`](https://github.com/jmglov/jmglov.net/blob/main/blog/posts.edn),
+[`posts.edn`](https://github.com/jmglov/jmglov.net/blob/575a12cf2a87a4fd2a46dc131ed3a51f864ba57f/blog/posts.edn),
 which looks like this:
 
 ``` clojure
