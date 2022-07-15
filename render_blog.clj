@@ -30,7 +30,8 @@
   [(fs/file ".." "templates")
    templates-dir])
 
-(def out-dir (fs/file "public" "blog"))
+(def cache-dir (fs/create-dirs (fs/file ".cache")))
+(def out-dir (fs/create-dirs (fs/file "public" "blog")))
 
 (def posts-file (fs/file blog-dir "posts.edn"))
 (def posts (->> (lib/load-posts posts-dir default-metadata)
@@ -56,6 +57,7 @@
   (lib/write-post! {:page-template page-template
                     :bodies bodies
                     :discuss-fallback discuss-fallback
+                    :cache-dir cache-dir
                     :out-dir out-dir
                     :post-template post-template
                     :posts-dir posts-dir

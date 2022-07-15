@@ -198,6 +198,7 @@
 
 (defn write-post! [{:keys [bodies
                            discuss-fallback
+                           cache-dir
                            out-dir
                            page-template
                            post-template
@@ -211,12 +212,20 @@
         markdown-file (fs/file posts-dir file)
         rendering-system-files (concat rendering-system-files
                                        ["lib.clj" "highlighter.clj"])
+        post-modified? (or modified?
+                           (rendering-modified? rendering-system-files out-file))
+        cached-file (fs/file cache-dir (str file ".pre-template.html"))
+        cached? (and (fs/exists? cached-file) (not post-modified?))
+        html (if cached?
+               (delay
+                 (println "Reading file from cache:" (str cached-file))
+                 (slurp cached-file))
+               html)
         ;; The index page and XML feed will need the post HTML if they need to
         ;; be re-rendered, so pass it along (but not deferenced, as it may not
         ;; be needed)
         _ (swap! bodies assoc file html)]
-    (if (or modified?
-            (rendering-modified? rendering-system-files out-file))
+    (if post-modified?
       (let [body (selmer/render post-template {:body @html
                                                :title title
                                                :date date
@@ -227,9 +236,9 @@
                                         :body body})]
         (println "Writing post:" (str out-file))
         (spit out-file rendered-html)
-        (let [legacy-dir (fs/file out-dir
-                                  (str/replace date "-" "/")
-                                  (str/replace file ".md" ""))]))
+        (when (and cache-dir (not cached?))
+          (println "Writing rendered HTML to cache:" (str cached-file))
+          (spit cached-file @html)))
       (println file "not modified; using cached version"))))
 
 (defn write-tag! [{:keys [page-template
