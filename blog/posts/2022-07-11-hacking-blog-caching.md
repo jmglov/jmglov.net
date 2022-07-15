@@ -198,4 +198,7 @@ If you're interested in seeing this in action, take a look at
 and [`lib.clj`](https://github.com/jmglov/jmglov.net/blob/main/lib.clj). Just
 note that things are not very polished, and there are likely to be bugs. 😬
 
-**Need to add fixes.**
+**Update:** shortly after writing this code ([the next
+morning](2022-07-12-stuff-i-learned.md) on my dog walk, in fact), I realised
+that my caching was horribly broken. To see how I fixed it, check out [Hacking
+the blog: actually caching](2022-07-15-hacking-blog-actually-caching.html).
