@@ -31,7 +31,7 @@
 (def out-dir (fs/file "public" "blog"))
 
 (def posts-file (fs/file blog-dir "posts.edn"))
-(def posts (->> (lib/load-posts-from-dir posts-dir default-metadata)
+(def posts (->> (lib/load-posts posts-dir default-metadata)
                 (lib/add-modified-metadata posts-dir out-dir)))
 
 ;;;; Sync images and CSS

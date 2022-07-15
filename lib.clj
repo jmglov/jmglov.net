@@ -57,25 +57,6 @@
 (defn html-file [file]
   (str/replace file ".md" ".html"))
 
-(defn markdown->html [file]
-  (let [_ (println "Processing markdown for file:" (str file))
-        markdown (slurp file)
-        markdown (h/highlight-clojure markdown)
-        ;; make links without markup clickable
-        markdown (str/replace markdown #"http[A-Za-z0-9/:.=#?_-]+([\s])"
-                              (fn [[match ws]]
-                                (format "[%s](%s)%s"
-                                        (str/trim match)
-                                        (str/trim match)
-                                        ws)))
-        ;; allow links with markup over multiple lines
-        markdown (str/replace markdown #"\[[^\]]+\n"
-                              (fn [match]
-                                (str/replace match "\n" "$$RET$$")))
-        {:keys [html]} (md/md-to-html-string-with-meta markdown :reference-links? true)
-        html (str/replace html "$$RET$$" "\n")]
-    html))
-
 (defn transform-metadata
   ([metadata]
    (transform-metadata metadata {}))
@@ -88,9 +69,9 @@
         (into {})
         (merge default-metadata))))
 
-(defn markdown->html-meta
+(defn markdown->html
   ([file]
-   (markdown->html-meta file {}))
+   (markdown->html file {}))
   ([file default-metadata]
    (let [_ (println "Processing markdown for file:" (str file))
          markdown (slurp file)
@@ -112,20 +93,12 @@
          (update :html #(str/replace % "$$RET$$" "\n"))))))
 
 (defn load-posts
-  "Returns posts in descending date order"
-  [posts-file]
-  (->> (slurp posts-file)
-       (format "[%s]")
-       edn/read-string
-       (sort-by :date (comp - compare))))
-
-(defn load-posts-from-dir
   "Returns all posts from `post-dir` in descending date order"
   ([posts-dir]
-   (load-posts-from-dir posts-dir {}))
+   (load-posts posts-dir {}))
   ([posts-dir default-metadata]
    (->> (fs/glob posts-dir "*.md")
-        (map #(markdown->html-meta (.toFile %) default-metadata))
+        (map #(markdown->html (.toFile %) default-metadata))
         (remove
          (fn [{:keys [metadata]}]
            (when-let [missing-keys
