@@ -19,7 +19,10 @@
     :title})
 
 (defn rendering-modified? [rendering-system-files target-file]
-  (seq (fs/modified-since target-file rendering-system-files)))
+  (let [rendering-system-files (concat rendering-system-files
+                                       (map fs/file ["lib.clj"
+                                                     "deps.edn"]))]
+    (seq (fs/modified-since target-file rendering-system-files))))
 
 (defn stale? [src target]
   (seq (fs/modified-since target src)))
@@ -28,7 +31,7 @@
   (when (stale? src target)
     (println "Writing" (str target))
     (fs/create-dirs (.getParent (fs/file target)))
-    (fs/copy src target)))
+    (fs/copy src target {:replace-existing true})))
 
 (defn copy-tree-modified [src-dir target-dir out-dir]
   (let [modified-paths (fs/modified-since (fs/file target-dir)
@@ -69,28 +72,44 @@
         (into {})
         (merge default-metadata))))
 
-(defn markdown->html
+(defn pre-process-markdown [markdown]
+  (-> markdown
+      h/highlight-clojure
+      ;; make links without markup clickable
+      (str/replace #"http[A-Za-z0-9/:.=#?_-]+([\s])"
+                   (fn [[match ws]]
+                     (format "[%s](%s)%s"
+                             (str/trim match)
+                             (str/trim match)
+                             ws)))
+      ;; allow links with markup over multiple lines
+      (str/replace #"\[[^\]]+\n"
+                   (fn [match]
+                     (str/replace match "\n" "$$RET$$")))))
+
+(defn post-process-markdown [html]
+  (str/replace html "$$RET$$" "\n"))
+
+(defn markdown->html [file]
+  (let [markdown (slurp file)]
+    (println "Processing markdown for file:" (str file))
+    (-> markdown
+        pre-process-markdown
+        (md/md-to-html-string-with-meta :reference-links? true)
+        :html
+        post-process-markdown)))
+
+(defn load-post
   ([file]
-   (markdown->html file {}))
+   (load-post file {}))
   ([file default-metadata]
-   (let [_ (println "Processing markdown for file:" (str file))
-         markdown (slurp file)
-         markdown (h/highlight-clojure markdown)
-         ;; make links without markup clickable
-         markdown (str/replace markdown #"http[A-Za-z0-9/:.=#?_-]+([\s])"
-                               (fn [[match ws]]
-                                 (format "[%s](%s)%s"
-                                         (str/trim match)
-                                         (str/trim match)
-                                         ws)))
-         ;; allow links with markup over multiple lines
-         markdown (str/replace markdown #"\[[^\]]+\n"
-                               (fn [match]
-                                 (str/replace match "\n" "$$RET$$")))]
-     (-> (md/md-to-html-string-with-meta markdown :reference-links? true)
-         (update :metadata #(transform-metadata % default-metadata))
-         (assoc-in [:metadata :file] (.getName file))
-         (update :html #(str/replace % "$$RET$$" "\n"))))))
+   {:html (delay (markdown->html file))
+    :metadata (do
+                (println "Reading metadata for file:" (str file))
+                (-> (slurp file)
+                    md/md-to-meta
+                    (transform-metadata default-metadata)
+                    (assoc :file (.getName file))))}))
 
 (defn load-posts
   "Returns all posts from `post-dir` in descending date order"
@@ -98,7 +117,7 @@
    (load-posts posts-dir {}))
   ([posts-dir default-metadata]
    (->> (fs/glob posts-dir "*.md")
-        (map #(markdown->html (.toFile %) default-metadata))
+        (map #(load-post (.toFile %) default-metadata))
         (remove
          (fn [{:keys [metadata]}]
            (when-let [missing-keys
@@ -115,8 +134,6 @@
   [posts-dir out-dir posts]
   (let [post-files (map #(fs/file posts-dir (get-in % [:metadata :file])) posts)
         html-file-exists? #(->> (get-in % [:metadata :file])
-                                fs/file
-                                .getName
                                 lib/html-file
                                 (fs/file out-dir)
                                 fs/exists?)
@@ -130,8 +147,12 @@
         new-or-modified-posts (set/union new-posts modified-posts)]
     (map #(assoc-in %
                     [:metadata :modified?]
-                    (contains? new-or-modified-posts (get-in % [:metadata :file])))
+                    (contains? new-or-modified-posts
+                               (get-in % [:metadata :file])))
          posts)))
+
+(defn some-post-modified [posts]
+  (some (comp :modified? :metadata) posts))
 
 (defn posts-by-tag [posts]
   (->> posts
@@ -184,20 +205,19 @@
                            rendering-system-files]
                     :as config}
                    {:keys [metadata html]}]
-  (let [{:keys [file title date discuss tags]
+  (let [{:keys [file title date discuss tags modified?]
          :or {discuss discuss-fallback}} metadata
         out-file (fs/file out-dir (html-file file))
         markdown-file (fs/file posts-dir file)
         rendering-system-files (concat rendering-system-files
                                        ["lib.clj" "highlighter.clj"])
-        ;; We need to build the body regardless of whether the file is
-        ;; stale because it's used in the index page and RSS feed. This
-        ;; really needs to be cleaned up.
-        body html
-        _ (swap! bodies assoc file body)]
-    (when (or (rendering-modified? rendering-system-files out-file)
-              (stale? markdown-file out-file))
-      (let [body (selmer/render post-template {:body body
+        ;; The index page and XML feed will need the post HTML if they need to
+        ;; be re-rendered, so pass it along (but not deferenced, as it may not
+        ;; be needed)
+        _ (swap! bodies assoc file html)]
+    (if (or modified?
+            (rendering-modified? rendering-system-files out-file))
+      (let [body (selmer/render post-template {:body @html
                                                :title title
                                                :date date
                                                :discuss discuss
@@ -209,7 +229,8 @@
         (spit out-file rendered-html)
         (let [legacy-dir (fs/file out-dir
                                   (str/replace date "-" "/")
-                                  (str/replace file ".md" ""))])))))
+                                  (str/replace file ".md" ""))]))
+      (println file "not modified; using cached version"))))
 
 (defn write-tag! [{:keys [page-template
                           blog-title

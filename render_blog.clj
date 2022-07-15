@@ -24,6 +24,8 @@
 (def page-template (slurp (fs/file templates-dir "base.html")))
 (def post-template (slurp (fs/file templates-dir "post.html")))
 
+(def num-posts-in-index-page 3)
+
 (def rendering-system-files
   [(fs/file ".." "templates")
    templates-dir])
@@ -64,15 +66,16 @@
 
 (let [archive-file (fs/file out-dir "archive.html")
       rendering-modified? (lib/rendering-modified? rendering-system-files
-                                                   archive-file)
-      new-posts? (lib/stale? posts-file archive-file)]
-  (when true #_(or rendering-modified? new-posts?)
-    (println "Writing archive page" (str archive-file))
-    (spit archive-file
-          (selmer/render page-template
-                         {:skip-archive true
-                          :title (str blog-title " - Archive")
-                          :body (hiccup/html (lib/post-links {} "Archive" posts))}))))
+                                                   archive-file)]
+  (if (or rendering-modified? (lib/some-post-modified posts))
+    (do
+      (println "Writing archive page" (str archive-file))
+      (spit archive-file
+            (selmer/render page-template
+                           {:skip-archive true
+                            :title (str blog-title " - Archive")
+                            :body (hiccup/html (lib/post-links {} "Archive" posts))})))
+    (println "No posts modified; skipping archive file")))
 
 ;;;; Generate tag pages
 
@@ -81,46 +84,50 @@
 
 (let [tags-file (fs/file tags-dir "index.html")
       rendering-modified? (lib/rendering-modified? rendering-system-files
-                                                   tags-file)
-      new-posts? (lib/stale? posts-file tags-file)]
-  (when true #_(or rendering-modified? new-posts?)
-    (println "Writing tags page" (str tags-file))
-    (spit tags-file
-          (selmer/render page-template
-                         {:skip-archive true
-                          :title (str blog-title " - Tags")
-                          :relative-path "../"
-                          :body (hiccup/html (lib/tag-links "Tags" posts-by-tag))}))
-    (doseq [tag-and-posts posts-by-tag]
-      (lib/write-tag! {:page-template page-template
-                       :blog-title blog-title
-                       :tags-dir tags-dir}
-                      tag-and-posts))))
+                                                   tags-dir)]
+  (if (or rendering-modified? (lib/some-post-modified posts))
+    (do
+      (println "Writing tags page" (str tags-file))
+      (spit tags-file
+            (selmer/render page-template
+                           {:skip-archive true
+                            :title (str blog-title " - Tags")
+                            :relative-path "../"
+                            :body (hiccup/html (lib/tag-links "Tags" posts-by-tag))}))
+      (doseq [tag-and-posts posts-by-tag]
+        (lib/write-tag! {:page-template page-template
+                         :blog-title blog-title
+                         :tags-dir tags-dir}
+                        tag-and-posts)))
+    (println "No posts modified; skipping tag files")))
 
-;;;; Generate index page with last 3 posts
+;;;; Generate index page with most recent posts
 
 (let [index-file (fs/file out-dir "index.html")
       rendering-modified? (lib/rendering-modified? rendering-system-files
                                                    index-file)
-      new-posts? (lib/stale? posts-file index-file)
-      index (for [{:keys [metadata]} (take 3 posts)
-                  :let [{:keys [file title date preview discuss]
-                         :or {discuss discuss-fallback}}
-                        metadata]
-                  :when (not preview)]
-              [:div
-               [:h1 [:a {:href (str/replace file ".md" ".html")}
-                     title]]
-               (get @bodies file)
-               [:p "Discuss this post " [:a {:href discuss} "here"] "."]
-               [:p [:i "Published: " date]]])]
-  (when true #_(or rendering-modified? new-posts?)
-    (println "Writing index page" (str index-file))
-    (spit index-file
-          (selmer/render page-template
-                         {:title blog-title
-                          :body (hiccup/html {:escape-strings? false}
-                                             index)}))))
+      index-posts (take num-posts-in-index-page posts)
+      new-index-posts? (lib/some-post-modified index-posts)]
+  (if (or rendering-modified? new-index-posts?)
+    (let [index (for [{:keys [metadata]} (take 3 posts)
+                      :let [{:keys [file title date preview discuss]
+                             :or {discuss discuss-fallback}}
+                            metadata]
+                      :when (not preview)]
+                  [:div
+                   [:h1 [:a {:href (str/replace file ".md" ".html")}
+                         title]]
+                   @(get @bodies file)
+                   [:p "Discuss this post " [:a {:href discuss} "here"] "."]
+                   [:p [:i "Published: " date]]])]
+      (println "Writing index page" (str index-file))
+      (spit index-file
+            (selmer/render page-template
+                           {:title blog-title
+                            :body (hiccup/html {:escape-strings? false}
+                                               index)})))
+    (println "None of the" num-posts-in-index-page
+             "most recent posts modified; skipping index page")))
 
 ;;;; Generate atom feeds
 
@@ -150,27 +157,29 @@
            [::atom/title title]
            [::atom/updated (lib/rfc-3339 date)]
            [::atom/content {:type "html"}
-            [:-cdata (get @bodies file)]]])])
+            [:-cdata @(get @bodies file)]]])])
       xml/indent-str))
 
 (let [feed-file (fs/file out-dir "atom.xml")
       clojure-feed-file (fs/file out-dir "planetclojure.xml")
-      rendering-modified? (or
-                           (lib/rendering-modified? rendering-system-files
-                                                    feed-file)
-                           (lib/rendering-modified? rendering-system-files
-                                                    clojure-feed-file))
-      new-posts? (or (lib/stale? posts-file feed-file)
-                     (lib/stale? posts-file clojure-feed-file))]
-  (when true #_(or rendering-modified? new-posts?)
-    (println "Writing feed" (str feed-file))
-    (spit feed-file (atom-feed posts))
-    (println "Writing Clojure feed" (str clojure-feed-file))
-    (spit clojure-feed-file
-          (atom-feed (filter
-                      (fn [{:keys [metadata]}]
-                        (some (:tags metadata) ["clojure" "clojurescript"]))
-                      posts)))))
+      clojure-posts (filter
+                     (fn [{:keys [metadata]}]
+                       (some (:tags metadata) ["clojure" "clojurescript"]))
+                     posts)]
+  (if (or (lib/rendering-modified? rendering-system-files clojure-feed-file)
+          (lib/some-post-modified clojure-posts))
+    (do
+      (println "Writing Clojure feed" (str clojure-feed-file))
+      (spit clojure-feed-file
+            (atom-feed clojure-posts)))
+    (println "No Clojure posts modified; skipping Clojure feed"))
+  (if (or (lib/rendering-modified? rendering-system-files feed-file)
+          (lib/some-post-modified posts))
+    (do
+      (println "Writing feed" (str feed-file))
+      (spit feed-file
+            (atom-feed posts)))
+    (println "No posts modified; skipping main feed")))
 
 ;; for JVM Clojure:
 (defn -main [& _args]
