@@ -14,5 +14,5 @@
                 :depends [render-blog]
                 :task (shell "aws s3 sync --delete public/blog/ s3://jmglov.net/blog/")}
   clean {:doc "Remove .work and public directory"
-         :task (do (fs/delete-tree ".work")
+         :task (do (fs/delete-tree ".cache")
                    (fs/delete-tree "public"))}}}
