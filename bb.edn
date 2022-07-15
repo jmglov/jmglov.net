@@ -1,8 +1,12 @@
-{:deps {jmglov/jmglov {:local/root "."}}
+{:deps {jmglov/jmglov {:local/root "."}
+        org.babashka/cli {:mvn/version "0.3.31"}
+        io.github.borkdude/quickblog {:local/root "../clojure/quickblog"}
+        #_"You use the newest SHA here:"
+        #_{:git/sha "b69c11f4292702f78a8ac0a9f32379603bebf2af"}
+        }
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
- {:requires ([babashka.fs :as fs]
-             [tasks-helper :as th])
+ {:requires ([babashka.fs :as fs])
   render {:doc "Render website"
           :task (load-file "render.clj")}
   render-blog {:doc "Render blog"
