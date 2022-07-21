@@ -42,7 +42,7 @@
             :let [target-path (fs/file out-dir path)]]
       (fs/create-dirs (.getParent target-path))
       (println "Writing" (str target-path))
-      (fs/copy (fs/file path) target-path))))
+      (fs/copy (fs/file path) target-path {:replace-existing true}))))
 
 (defn rfc-3339-now []
   (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
