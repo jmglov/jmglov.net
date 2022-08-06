@@ -6,17 +6,43 @@
         }
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
- {:requires ([babashka.fs :as fs])
+ {:init (def opts (merge {:blog-title "jmglov's blog"
+                          :blog-description "A blog about stuff but also things."
+                          :blog-root "https://jmglov.net/blog/"
+                          :about-link "https://jmglov.net/"
+                          :twitter-handle "jmglov"
+                          :assets-dir "blog/assets"
+                          :num-index-posts 3
+                          :cache-dir ".cache"
+                          :out-dir "public/blog"
+                          :posts-dir "blog/posts"
+                          :templates-dir "blog/templates"}
+                         (cli/parse-opts *command-line-args*)))
+
+  :requires ([babashka.fs :as fs]
+             [quickblog.api :as qb]
+             [babashka.cli :as cli])
+
+  new {:doc "Create new blog article"
+       :task (qb/new opts)}
+
   render {:doc "Render website"
           :task (load-file "render.clj")}
+
   render-blog {:doc "Render blog"
-               :task (load-file "render_blog.clj")}
+             :task (qb/quickblog opts)}
+
   publish {:doc "Publish to jmglov.net"
-           :depends [render]
+           :depends [render publish-blog]
            :task (shell "aws s3 sync public/ s3://jmglov.net/")}
+
   publish-blog {:doc "Publish blog"
                 :depends [render-blog]
                 :task (shell "aws s3 sync --delete public/blog/ s3://jmglov.net/blog/")}
+
   clean {:doc "Remove .work and public directory"
          :task (do (fs/delete-tree ".cache")
-                   (fs/delete-tree "public"))}}}
+                   (fs/delete-tree "public"))}
+
+  watch  {:doc "Watch posts and templates and render file changes"
+          :task (qb/watch opts)}}}
