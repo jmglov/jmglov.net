@@ -11,11 +11,7 @@ h1, h2, h3 {
 }
 
 a {
-  color: rgb(15, 23, 42)
-}
-
-.hljs,.clojure {
-  background-color: lightgray;
+  color: rgb(51, 65, 85)
 }
 
 .wrapper {
@@ -53,7 +49,6 @@ p {
 }
 
 .page-link {
-  color: #111;
   text-decoration: none;
   vertical-align: middle;
 }
@@ -71,11 +66,6 @@ ul.index {
   margin-bottom: 1em;
 }
 
-.def { color: #00f; }
-.symbol { color: #708; }
-.local { color: cadetblue; }
-.string { color: #a11; }
-.number { color: blue; }
-.keyword { color: #219; }
-.uneval, .comma { filter: opacity(0.5); }
-.regex { color: #a11;}
+code {
+  white-space: nowrap;
+}
