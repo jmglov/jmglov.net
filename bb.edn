@@ -14,6 +14,8 @@
                           :assets-dir "blog/assets"
                           :num-index-posts 3
                           :cache-dir ".cache"
+                          :favicon true
+                          :favicon-dir "favicon"
                           :out-dir "public/blog"
                           :posts-dir "blog/posts"
                           :templates-dir "blog/templates"}
@@ -30,7 +32,17 @@
           :task (load-file "render.clj")}
 
   render-blog {:doc "Render blog"
-             :task (qb/quickblog opts)}
+               :requires ([quickblog.internal :as lib])
+               :task (let [{:keys [favicon-dir out-dir]} opts]
+                       (fs/create-dirs out-dir)
+                       (doseq [path (fs/glob favicon-dir "**")
+                               :let [source (fs/file path)
+                                     target (fs/file out-dir (fs/file-name source))]]
+                         (when (seq (fs/modified-since target source))
+                           (println "favicon modified; copying"
+                                    (str source) "->" (str target))
+                           (fs/copy source target)))
+                       (qb/quickblog opts))}
 
   publish {:doc "Publish to jmglov.net"
            :depends [render publish-blog]
