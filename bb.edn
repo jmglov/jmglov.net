@@ -7,6 +7,7 @@
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
  {:init (def opts (merge {:blog-title "jmglov's blog"
+                          :blog-author "Josh Glover"
                           :blog-description "A blog about stuff but also things."
                           :blog-root "https://jmglov.net/blog/"
                           :about-link "https://jmglov.net/"
