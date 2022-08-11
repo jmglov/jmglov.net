@@ -42,7 +42,7 @@
                          (when (seq (fs/modified-since target source))
                            (println "favicon modified; copying"
                                     (str source) "->" (str target))
-                           (fs/copy source target)))
+                           (fs/copy source target {:replace-existing true})))
                        (qb/quickblog opts))}
 
   publish {:doc "Publish to jmglov.net"
