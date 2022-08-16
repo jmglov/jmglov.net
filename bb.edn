@@ -29,6 +29,9 @@
   new {:doc "Create new blog article"
        :task (qb/new opts)}
 
+  refresh-templates {:doc "Update to latest templates."
+                     :task (qb/refresh-templates opts)}
+
   render {:doc "Render website"
           :task (load-file "render.clj")}
 
