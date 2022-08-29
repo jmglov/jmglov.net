@@ -1,7 +1,7 @@
 Title: Hacking the blog: social sharing
 Date: 2022-08-17
 Tags: clojure,blog,babashka
-Summary: It's been a month and a day since I last hacked the blog, and five days since I've blogged at all! I hope the amazing preview image above makes up for my long absence.
+Description: It's been a month and a day since I last hacked the blog, and five days since I've blogged at all! I hope the amazing preview image above makes up for my long absence.
 Twitter-Handle: jmglov
 Image: assets/2022-08-17-preview.png
 Image-Alt: A laptop sits open on a desk next to camping gear
