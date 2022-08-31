@@ -69,3 +69,8 @@ ul.index {
 code {
   white-space: nowrap;
 }
+
+img.border {
+  border-style: solid;
+  border-width: 1px;
+}

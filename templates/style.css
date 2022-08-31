@@ -67,6 +67,11 @@ ul.index {
   margin-bottom: 1em;
 }
 
+img.border {
+  border-style: solid;
+  border-width: 1px;
+}
+
 .def { color: #00f; }
 .symbol { color: #708; }
 .local { color: cadetblue; }
