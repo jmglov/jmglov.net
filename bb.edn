@@ -1,30 +1,31 @@
 {:deps {jmglov/jmglov {:local/root "."}
-        org.babashka/cli {:mvn/version "0.3.31"}
         io.github.borkdude/quickblog {:local/root "../clojure/quickblog"}
         #_"You use the newest SHA here:"
         #_{:git/sha "b69c11f4292702f78a8ac0a9f32379603bebf2af"}
         }
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
- {:init (def opts (merge {:blog-title "jmglov's blog"
-                          :blog-author "Josh Glover"
-                          :blog-description "A blog about stuff but also things."
-                          :blog-root "https://jmglov.net/blog/"
-                          :about-link "https://jmglov.net/"
-                          :twitter-handle "jmglov"
-                          :assets-dir "blog/assets"
-                          :num-index-posts 3
-                          :cache-dir ".cache"
-                          :favicon true
-                          :favicon-dir "favicon"
-                          :out-dir "public/blog"
-                          :posts-dir "blog/posts"
-                          :templates-dir "blog/templates"}
-                         (cli/parse-opts *command-line-args*)))
+ {:init (def opts {:blog-title "jmglov's blog"
+                   :blog-author "Josh Glover"
+                   :blog-description "A blog about stuff but also things."
+                   :blog-root "https://jmglov.net/blog/"
+                   :about-link "https://jmglov.net/"
+                   :twitter-handle "jmglov"
+                   :assets-dir "blog/assets"
+                   :num-index-posts 3
+                   :cache-dir ".cache"
+                   :favicon true
+                   :favicon-dir "favicon"
+                   :out-dir "public/blog"
+                   :posts-dir "blog/posts"
+                   :templates-dir "blog/templates"})
 
   :requires ([babashka.fs :as fs]
              [quickblog.api :as qb]
-             [babashka.cli :as cli])
+             [quickblog.cli :as cli])
+
+  quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
+             :task (cli/dispatch opts)}
 
   new {:doc "Create new blog article"
        :task (qb/new opts)}
@@ -53,7 +54,7 @@
            :task (shell "aws s3 sync public/ s3://jmglov.net/")}
 
   publish-blog {:doc "Publish blog"
-                :depends [render-blog]
+                #_:depends #_[render-blog]
                 :task (shell "aws s3 sync --delete public/blog/ s3://jmglov.net/blog/")}
 
   clean {:doc "Remove .work and public directory"
