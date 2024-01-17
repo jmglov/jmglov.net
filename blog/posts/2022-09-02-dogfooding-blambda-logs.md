@@ -4,6 +4,7 @@ Tags: clojure,blambda,aws
 Description: In which Blambda and I get serious about access logs.
 Image: assets/2022-09-02-preview.png
 Image-Alt: A French Bulldog stands next to a bowl of food, staring mournfully at the camera
+Discuss: https://clojurians.slack.com/archives/C04PSBFMMDJ/
 
 In the last instalment of [Dogfooding Blambda](tags/blambda.html), we dove into
 [the details of how the new command line interface

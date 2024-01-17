@@ -1,6 +1,7 @@
 Title: Dogfooding Blambda 4: CLI, CLIier, CLIiest
 Date: 2022-08-11
 Tags: clojure,aws,blambda,babashka,lambda
+Discuss: https://clojurians.slack.com/archives/C04PSBFMMDJ/
 
 In [yesterday's installment of Dogfooding
 Blambda](2022-08-10-dogfooding-blambda-cli.html), I fully intended to show y'all

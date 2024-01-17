@@ -4,6 +4,7 @@ Tags: clojure,blambda,aws
 Description: In which Blambda is all grown up!
 Image: assets/2023-01-04-preview.png
 Image-Alt: Movie poster for Analyze This
+Discuss: https://clojurians.slack.com/archives/C04PSBFMMDJ/
 
 I'm giving a talk on [Blambda](https://github.com/jmglov/blambda) later this
 month at a local meetup group or two, and since I'm an experienced speaker, the

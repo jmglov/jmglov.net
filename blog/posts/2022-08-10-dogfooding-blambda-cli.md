@@ -1,6 +1,7 @@
 Title: Dogfooding Blambda 3: CLIify this!
 Date: 2022-08-10
 Tags: clojure,aws,blambda,babashka,lambda
+Discuss: https://clojurians.slack.com/archives/C04PSBFMMDJ/
 
 When [last we left](2022-08-09-dogfooding-blambda-2.html) the epic tale of me
 trying to use a thing that I made myself and then being outraged at how poorly

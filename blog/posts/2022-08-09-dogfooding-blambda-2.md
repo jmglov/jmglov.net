@@ -1,6 +1,7 @@
 Title: Dogfooding Blambda : I heard you liked layers
 Tags: clojure,aws,blambda,s3,babashka,lambda
 Date: 2022-08-09
+Discuss: https://clojurians.slack.com/archives/C04PSBFMMDJ/
 
 After a brief detour to port my blog to
 [quickblog](https://github.com/borkdude/quickblog) and enjoy some sun in Málaga,
@@ -360,4 +361,4 @@ probably that I have to build and deploy Blambda from the Blambda repo, build
 the deps layer from the Blambda repo, but deploy the deps layer and build and
 deploy the lambda archive itself from the s3-log-parser repo. Gross. Will fix.
 
-[blambda]:[assets/2022-08-07-blambda.png "Such logs!" width=800px]
+[blambda]:[assets/2022-08-09-blambda.png "Such logs!" width=800px]
