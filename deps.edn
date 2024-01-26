@@ -1,5 +1,6 @@
 {:paths ["." "classes"]
  :deps {markdown-clj/markdown-clj {:mvn/version "1.10.7"}
+        org.babashka/cli {:mvn/version "0.8.55"}
         babashka/fs {:mvn/version "0.1.6"}
         org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
         hiccup/hiccup {:mvn/version "2.0.0-alpha2"}

@@ -20,7 +20,9 @@
                    :posts-dir "blog/posts"
                    :templates-dir "blog/templates"})
 
-  :requires ([babashka.fs :as fs]
+  :requires ([babashka.cli]
+             [babashka.fs :as fs]
+             [clojure.string :as str]
              [quickblog.api :as qb]
              [quickblog.cli :as cli])
 
@@ -28,7 +30,26 @@
              :task (cli/dispatch opts)}
 
   new {:doc "Create new blog article"
-       :task (qb/new opts)}
+       :task (qb/new (merge opts
+                            {:preview true
+                             :template-file "blog/new-post.md"}))}
+
+  new-draft {:doc "Create a draft for a blog article"
+             :task (let [{:keys [file title date] :as parsed-opts}
+                         (babashka.cli/parse-opts (seq *command-line-args*)
+                                                  {:coerce {:tags []}})]
+                     (qb/new (merge opts
+                                    parsed-opts
+                                    {:file (format "draft-%s" file)
+                                     :title (or title
+                                                (-> file
+                                                    (str/replace "-" " ")
+                                                    str/capitalize))
+                                     :date (or date "FIXME")
+                                     :image (format "draft-%s-preview.png"
+                                                    (str/replace file (re-pattern "[.]md$") ""))
+                                     :preview true
+                                     :template-file "blog/new-post.md"})))}
 
   refresh-templates {:doc "Update to latest templates."
                      :task (qb/refresh-templates opts)}
