@@ -46,26 +46,28 @@
     <div class="site-header">
       <div class="wrapper">
         <div class="site-nav">
-          <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
-          <a class="page-link" href="{{relative-path | safe}}tags/index.html">Tags</a>
-          <a class="page-link" href="{{discuss-link}}">Discuss</a>
-	  <a class="page-link" href="{{relative-path | safe}}atom.xml">
-            Feed
-          </a>
-	  {% if twitter-handle %}
-	  <a class="page-link" href="https://twitter.com/{{twitter-handle}}">
-            Twitter
-          </a>
-	  {% endif %}
-	  {% if about-link %}
-	  <a class="page-link" href="{{about-link}}">About</a>
-	  {% endif %}
+          <div>
+            🗃️ <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
+          </div>
+          <div>
+            🏷 <a class="page-link" href="{{relative-path | safe}}tags/index.html">Tags</a>
+          </div>
+        <div>
+            <img src="{{relative-path | safe}}assets/rss-color-svgrepo-com.svg" alt="RSS icon"
+                style="width: 15px; height: 15px;" />
+            <a class="page-link" href="{{relative-path | safe}}atom.xml">Feed</a>
+          </div>
+          {% if about-link %}
+          <div>
+            🪪 <a class="page-link" href="{{about-link}}">About</a>
+          </div>
+          {% endif %}
         </div>
         <div>
           <h1 class="site-title">
             <a class="page-link" href="{{relative-path | safe}}index.html">{{blog-title}}</a>
           </h1>
-	  <p>{{blog-description}}</p>
+          <p>{{blog-description}}</p>
         </div>
       </div>
     </div>
@@ -75,8 +77,8 @@
       {{body | safe }}
 
       {% if not skip-archive %}
-      <div style="margin-bottom: 20px; float: right;">
-        <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
+      <div id="archive-footer">
+        🗃️ <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
       </div>
       {% endif %}
     </div>

@@ -8,19 +8,31 @@
   {% endif %}
 </h1>
 {{body | safe}}
-{% if discuss %}
-<p>Discuss this post <a href="{{discuss}}">here</a>.</p>
-{% endif %}
-<p><i>Published: {{date}}</i></p>
+<div class="post-footer">
+  <div class="post-details">
 {% if tags %}
-<p>
-  <i>
-  Tagged:
-  {% for tag in tags %}
-  <span class="tag">
-    <a href="tags/{{tag}}.html">{{tag}}</a>
-  </span>
-  {% endfor %}
-  </i>
-</p>
+    <div>
+      🏷
+{% for tag in tags %}
+      <span class="tag">
+        <a href="tags/{{tag}}.html">{{tag}}</a>
+      </span>
+{% endfor %}
+    </div>
 {% endif %}
+    <div>📝 Published: {{date}}</div>
+{% if discuss %}
+    <div>📣 Discuss this post <a href="{{discuss}}">here</a></div>
+{% endif %}
+  </div>
+{% if any prev next %}
+  <div class="post-prev-next">
+{% if prev %}
+    <div>⏪ <a href="{{prev.file|replace:.md:.html}}">{{prev.title}}</a></div>
+{% endif %}
+{% if next %}
+    <div><a href="{{next.file|replace:.md:.html}}">{{next.title}}</a> ⏩</div>
+{% endif %}
+  </div>
+{% endif %}
+</div>
