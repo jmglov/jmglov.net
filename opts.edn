@@ -1,0 +1,14 @@
+{:blog-title "jmglov's blog"
+ :blog-author "Josh Glover"
+ :blog-description "A blog about stuff but also things."
+ :blog-root "https://jmglov.net/blog/"
+ :about-link "https://jmglov.net/"
+ :assets-dir "blog/assets"
+ :num-index-posts 3
+ :cache-dir ".cache"
+ :favicon true
+ :favicon-dir "favicon"
+ :out-dir "public/blog"
+ :posts-dir "blog/posts"
+ :templates-dir "blog/templates"
+ :link-posts true}

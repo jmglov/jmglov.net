@@ -7,4 +7,5 @@
         babashka/pods {:git/url "https://github.com/babashka/pods"
                        :git/sha "93081b75e66fb4c4d161f89e714c6b9e8d55c8d5"}
         rewrite-clj/rewrite-clj {:mvn/version "1.1.45"}
-        selmer/selmer {:mvn/version "1.12.53"}}}
+        selmer/selmer {:mvn/version "1.12.53"}
+        tick/tick {:mvn/version "0.7.5"}}}
