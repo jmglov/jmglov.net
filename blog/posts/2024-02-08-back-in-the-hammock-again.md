@@ -86,15 +86,9 @@ saddened". 🙄
 Pitch leadership talks a big game about their people first approach, which is
 not really unique in these days of "woke capitalism" where many companies feel
 the need to prostrate themselves at the alter of Diversity, Equity, & Inclusion
-(with the exception of brave iconoclasts like 37Signals, helmed by brilliant
-genius DHH who has the power of extrapolating things that work at his tiny
-company where two men make all of the decisions to every workplace everywhere;
-to wit: his explanation of [how DEI's dominance over the corporate world is
-waning](https://world.hey.com/dhh/the-waning-days-of-dei-s-dominance-9a5b656c);
-and just to lower the chances of this being taken out of context, OF COURSE I'M
-BEING SARCASTIC, DHH IS AN OPINIONATED BLOWHARD AND CRAPPY PERSON), but they are
-in the truly rarefied company of those who stick to their values when times get
-tough.
+(just to lower the chances of this being taken out of context, OF COURSE I'M
+BEING SARCASTIC, CAPITALISM IS FAR FROM WOKE!), but they are in the truly
+rarefied company of those who stick to their values when times get tough.
 
 Pitch's new CEO laid things out transparently, telling employees what the
 situation was, how the decision was made, and the reasons for making it. Every
