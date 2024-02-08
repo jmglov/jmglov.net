@@ -7,6 +7,7 @@
  :tasks
  {:requires ([babashka.cli]
              [babashka.fs :as fs]
+             [babashka.process :as p]
              [clojure.edn :as edn]
              [clojure.string :as str]
              [quickblog.api :as qb]
@@ -25,18 +26,21 @@
              :task (let [{:keys [file title date] :as parsed-opts}
                          (babashka.cli/parse-opts (seq *command-line-args*)
                                                   {:coerce {:tags []}})]
-                     (qb/new (merge opts
-                                    parsed-opts
-                                    {:file (format "draft-%s" file)
-                                     :title (or title
-                                                (-> file
-                                                    (str/replace "-" " ")
-                                                    str/capitalize))
-                                     :date (or date "FIXME")
-                                     :image (format "draft-%s-preview.png"
-                                                    (str/replace file (re-pattern "[.]md$") ""))
-                                     :preview true
-                                     :template-file "blog/new-post.md"})))}
+                     (if (:help parsed-opts)
+                       (println "Usage: bb new-draft --file FILE --title TITLE [--date DATE]")
+                       (let [file' (format "%s-%s" (or date "draft") file)]
+                         (qb/new (merge opts
+                                        parsed-opts
+                                        {:file file'
+                                         :title (or title
+                                                    (-> file
+                                                        (str/replace "-" " ")
+                                                        str/capitalize))
+                                         :date (or date "FIXME")
+                                         :image (format "%s-preview.png"
+                                                        (str/replace file' (re-pattern "[.]md$") ""))
+                                         :preview true
+                                         :template-file "blog/new-post.md"})))))}
 
   refresh-templates {:doc "Update to latest templates."
                      :task (qb/refresh-templates opts)}

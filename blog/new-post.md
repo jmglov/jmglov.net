@@ -9,6 +9,6 @@ Image-Alt: {{image-alt|default:FIXME}}
 {% endif %}
 
 {% if image %}![FIXME ALT TEXT GOES HERE][preview]
-[preview]: assets/assets/{{image}} "FIXME HOVER TEXT GOES HERE" width=800px
+[preview]: assets/{{image}} "FIXME HOVER TEXT GOES HERE" width=800px
 {% endif %}
 {{text|default:Write a blog post here}}
