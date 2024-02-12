@@ -3,7 +3,8 @@
             [babashka.fs :as fs]
             [clojure.edn :as edn]
             [clojure.string :as str]
-            [quickblog.api :as qb]))
+            [quickblog.api :as qb]
+            [tick.core :as t]))
 
 (defn read-opts []
   (-> (slurp "opts.edn") edn/read-string))
@@ -14,7 +15,8 @@
                                  {:coerce {:tags []}})]
     (if (:help parsed-opts)
       (println "Usage: bb new-draft --file FILE --title TITLE [--date DATE]")
-      (let [file' (format "%s-%s" (or date "draft") file)]
+      (let [date (if (re-matches #"(?i)now|today" date) (str (t/date)) date)
+            file' (format "%s-%s" (or date "draft") file)]
         (qb/new (merge opts
                        parsed-opts
                        {:file file'
@@ -27,7 +29,6 @@
                                        (str/replace file' (re-pattern "[.]md$") ""))
                         :preview true
                         :template-file "blog/new-post.md"}))))))
-
 (defn render-blog [{:keys [favicon-dir out-dir] :as opts}]
   (fs/create-dirs out-dir)
   (doseq [path (fs/glob favicon-dir "**")
