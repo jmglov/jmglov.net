@@ -11,8 +11,9 @@
              [clojure.edn :as edn]
              [clojure.string :as str]
              [quickblog.api :as qb]
-             [quickblog.cli :as cli])
-  :init (def opts (-> (slurp "opts.edn") edn/read-string))
+             [quickblog.cli :as cli]
+             [tasks])
+  :init (def opts (tasks/read-opts))
 
   quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
              :task (cli/dispatch opts)}
@@ -23,24 +24,10 @@
                              :template-file "blog/new-post.md"}))}
 
   new-draft {:doc "Create a draft for a blog article"
-             :task (let [{:keys [file title date] :as parsed-opts}
-                         (babashka.cli/parse-opts (seq *command-line-args*)
-                                                  {:coerce {:tags []}})]
-                     (if (:help parsed-opts)
-                       (println "Usage: bb new-draft --file FILE --title TITLE [--date DATE]")
-                       (let [file' (format "%s-%s" (or date "draft") file)]
-                         (qb/new (merge opts
-                                        parsed-opts
-                                        {:file file'
-                                         :title (or title
-                                                    (-> file
-                                                        (str/replace "-" " ")
-                                                        str/capitalize))
-                                         :date (or date "FIXME")
-                                         :image (format "%s-preview.png"
-                                                        (str/replace file' (re-pattern "[.]md$") ""))
-                                         :preview true
-                                         :template-file "blog/new-post.md"})))))}
+             :task (tasks/new-draft opts *command-line-args*)}
+
+  set-date {:doc "Set the date for a blog article"
+            :task (tasks/set-date opts *command-line-args*)}
 
   refresh-templates {:doc "Update to latest templates."
                      :task (qb/refresh-templates opts)}
@@ -49,17 +36,7 @@
           :task (load-file "render.clj")}
 
   render-blog {:doc "Render blog"
-               :requires ([quickblog.internal :as lib])
-               :task (let [{:keys [favicon-dir out-dir]} opts]
-                       (fs/create-dirs out-dir)
-                       (doseq [path (fs/glob favicon-dir "**")
-                               :let [source (fs/file path)
-                                     target (fs/file out-dir (fs/file-name source))]]
-                         (when (seq (fs/modified-since target source))
-                           (println "favicon modified; copying"
-                                    (str source) "->" (str target))
-                           (fs/copy source target {:replace-existing true})))
-                       (qb/quickblog opts))}
+               :task (tasks/render-blog opts)}
 
   publish {:doc "Publish to jmglov.net"
            :depends [render publish-blog]
