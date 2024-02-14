@@ -41,10 +41,11 @@
   (qb/quickblog opts))
 
 (defn set-date [opts args]
-  (let [{:keys [file date] :as parsed-opts} (babashka.cli/parse-opts (seq args))]
+  (let [{:keys [file date] :as parsed-opts} (babashka.cli/parse-opts (seq args))
+        date (if (re-matches #"(?i)now|today" date) (str (t/date)) date)]
     (if (:help parsed-opts)
       (println "Usage: bb set-date --file FILE --date DATE")
-      (let [new-filename (str/replace file #"(?:draft|\d{4}-\d{2}-\d{2}-)(.+)$"
+      (let [new-filename (str/replace file #"(?:draft-|\d{4}-\d{2}-\d{2}-)(.+)$"
                                       (format "%s-$1" date))
             content (slurp file)
             assets (->> content
