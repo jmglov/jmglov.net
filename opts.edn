@@ -11,4 +11,4 @@
  :out-dir "public/blog"
  :posts-dir "blog/posts"
  :templates-dir "blog/templates"
- :link-posts true}
+ :link-prev-next-posts true}

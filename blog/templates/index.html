@@ -21,13 +21,15 @@
                 <div>📣 Discuss this post <a href="{{post.discuss}}">here</a></div>
 {% endif %}
                 <div>📝 Published: {{post.date}}</div>
+            </div>
 {% if all forloop.last post.prev %}
+            <div class="post-prev-next">
                 <div>
                     📚 Read more:
                     <a href="{{post.prev.file|replace:.md:.html}}">{{post.prev.title}}</a>
                 </div>
             </div>
-        {% endif %}
+{% endif %}
         </div>
     </div>
 {% endfor %}
