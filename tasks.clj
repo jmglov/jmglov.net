@@ -12,10 +12,24 @@
 (defn new-draft [opts args]
   (let [{:keys [file title date] :as parsed-opts}
         (babashka.cli/parse-opts (seq args)
-                                 {:coerce {:tags []}})]
+                                 {:coerce {:tags []}})
+        default-template "blog/new-post.md"]
     (if (:help parsed-opts)
-      (println "Usage: bb new-draft --file FILE --title TITLE [--date DATE]")
-      (let [date (if (re-matches #"(?i)now|today" date) (str (t/date)) date)
+      (->> ["Usage: bb new-draft --file FILE [--title TITLE] [--date DATE] ..."
+            ""
+            "Arguments:"
+            "  --file           filename; will be prefixed with DATE if present or 'draft'"
+            "  --title          [default: FILE]"
+            "  --date           [default: 'FIXME'] date; use 'now' or 'today' for the current date"
+            "  --image          [default: FILE-preview.png] preview image (social sharing)"
+            "  --preview        [default: true] make post a preview"
+            (format "  --template-file  [default: %s] template to use for new post"
+                    default-template)]
+           (str/join "\n")
+           println)
+      (let [date (if (and date (re-matches #"(?i)now|today" date))
+                   (str (t/date))
+                   date)
             file' (format "%s-%s" (or date "draft") file)]
         (qb/new (merge opts
                        parsed-opts
@@ -28,7 +42,7 @@
                         :image (format "%s-preview.png"
                                        (str/replace file' (re-pattern "[.]md$") ""))
                         :preview true
-                        :template-file "blog/new-post.md"}))))))
+                        :template-file default-template}))))))
 (defn render-blog [{:keys [favicon-dir out-dir] :as opts}]
   (fs/create-dirs out-dir)
   (doseq [path (fs/glob favicon-dir "**")
