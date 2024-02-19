@@ -1,6 +1,6 @@
 Title: clickr goes frontend
 Date: 2024-01-22
-Tags: clojure,clojurescript,clickr,scittle
+Tags: clojure,clojurescript,clickr,scittle,clonejure
 Description: In which I get serious about CSS and stuff
 Image: assets/2024-01-22-preview.jpg
 Image-Alt: A line of astronauts standing on the moon with the sun mirrored in their visors
