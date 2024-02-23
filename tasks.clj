@@ -63,7 +63,7 @@
                                       (format "%s-$1" date))
             content (slurp file)
             assets (->> content
-                        (re-seq #"assets/(?:draft|\d{4}-\d{2}-\d{2}-)([\S]+)")
+                        (re-seq #"assets/(?:draft-|\d{4}-\d{2}-\d{2}-)([\S]+)")
                         set)
             content' (-> (reduce (fn [acc [filename asset-name]]
                                    (str/replace acc filename
