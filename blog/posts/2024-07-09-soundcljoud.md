@@ -1274,3 +1274,5 @@ own little Soundcloud clone webapp. Seems reasonable, right?
 
 We'll get into that in the next instalment of "Soundcljoud, or a young man's
 Soundcloud clonejure."
+
+Part 2: [Soundcljoud gets more cloudy](2024-07-20-soundcljoud-cloudy.html)
