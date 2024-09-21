@@ -182,3 +182,12 @@ and then laughed and I blamed it on Laddo and was then politely told to bloody
 well keep it down because the door was open and Arne was saying stuff that
 people probably wanted to hear more than they wanted to hear my stupid bullshit.
 
+## Photos
+
+These photos will be incorporated into the post at some point.
+
+![A hand-drawn illustration of day one of the conference with scenes of: a sofa and coffee table on the main stage; the screen on the main stage showing 'No internet connection. Reload.'; the front entrance to the Het Depot; screen printed t-shirts hanging on a clothesline; a person presenting a low key talk in an activity session in the Het Depot][day1]
+[day1]: assets/draft-heart-of-clojure-2024-day1.jpg "Day 1 of the conference (typical off by one error; this is clearly day 0)" width=800px
+
+Drawing by Evgeniy Latukhin, licenced under the [CC BY
+4.0](https://creativecommons.org/licenses/by/4.0/) licence.
