@@ -52,7 +52,7 @@
       (println "favicon modified; copying"
                (str source) "->" (str target))
       (fs/copy source target {:replace-existing true})))
-  (doseq [path (fs/glob out-dir "*.html")
+  (doseq [path (fs/glob out-dir "**/*.html")
           :let [f (fs/file path)]]
     (when (-> (slurp f) (str/includes? "livejs"))
       (println "Killing livejs file:" (str (fs/file-name f)))
