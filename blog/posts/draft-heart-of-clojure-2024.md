@@ -177,10 +177,131 @@ Now watch my eyes closely, you absolute buffoon: 🙄"
 70 minutes later and 5 minutes late to Arne's opening words, the three Bikemen
 of the Apocalypse rolled our cycles through the mighty gates of the [Het
 Depot](https://www.hetdepot.be/) and promptly encountered Vijay, who made a
-crack about us being on "Belgian time" (whatever **that** mean, you Dutchbag!)
+crack about us being on "Belgian time" (whatever **that** means, you Dutchbag!)
 and then laughed and I blamed it on Laddo and was then politely told to bloody
 well keep it down because the door was open and Arne was saying stuff that
 people probably wanted to hear more than they wanted to hear my stupid bullshit.
+
+We quickly stowed our bikes and changed into our haute couture, then slunk into
+the auditorium just in time for the opening keynote.
+
+### What it means to be open
+
+![Lu Wilson demonstrating their Dreamberd programming language][keynote1]
+[keynote1]: assets/draft-heart-of-clojure-2024-keynote1.jpg "The perfect programming language at work!" width=800px
+
+Photo by Ben Lovell, licenced under the **C'MON BEN, PICK A LICENCE AND DROP IT
+IN THE DISCORD ALREADY, MATE!** 😉
+
+[Lu Wilson kicked the conference
+off](https://2024.heartofclojure.eu/talks/what-it-means-to-be-open/) with a
+fantastic keynote where they talked about their journey from hacking away behind
+closed doors to putting themself and their work out there on the internet, warts
+and all, and the unexpectedly amazing things that happened because of that.
+
+Lu is a very cool person and an **incredible** speaker! They had the entire
+audience leaning forward, feasting on every word, and laughing at every slide
+and wisecrack. The gist of their talk is that everything they do is open source,
+and what they do is write terrible Javascript (their words, not mine) that does
+really fun things (my assessment, not theirs) with
+[sand](https://sandpond.cool/) and other [surrealist cellular
+automata](https://www.todepond.com/explore/cellpond/), make ["slightly surreal"
+videos](https://www.youtube.com/@TodePond) about the experience, invent the
+[perfect programming language](https://github.com/todepond/dreamberd)
+(implementation left as an exercise for the user), and most importantly, do it
+all out in the open. Lu strives to share one thing a day, every day, which might
+be as small as an interesting thought sent out on
+[Mastodon](https://mas.to/@TodePond) or
+[Bluesky](https://bsky.app/profile/todepond.com), as medium as a cool new
+feature in one of their many projects, or as big as a new video on their YouTube
+channel!
+
+At first, Lu felt very shy about sharing their messy code with the world, but
+their "share one thing every day" decision helped them overcome that, even when
+sharing code that
+
+> was one Javascript file, 4000 lines long, global variables all over the
+> place... of course, the real crime is not using Clojure.
+
+The crowd of Clojurians appreciated the pandering and responded with the guffaw
+that Lu was looking for.
+
+One really cool thing that Lu does when they encounter an "impossible" problem
+is to send a cry for help into the vastness of the internet, which often
+
+> awakens 50 nerds in the world who take it as their god-given mission to solve
+> this problem.
+
+One example of this was a particularly tricky issue their 2D game engine, to
+which a nerd came back after presumably spending 48 hours immersing themselves
+in academic journals from the last 200 years of mathematics, fending off sleep
+with massive amounts of coffee and sheer willpower, until they could come back
+to Lu and confidently explain
+
+> "It's just a matter of turning `s` and `t` back into coordinates linked to the
+> other quad"—I have no idea what any of that means.
+
+Lu rounded off their talk with some musings on what it means to be open,
+concluding that it probably looks different for each and every one of us, and in
+fact their understanding of openness is still evolving every day. I can't
+remember the exact call to action Lu issued to the rapt crowd, because I was too
+rapt myself to remember to scribble it down in my trusty conference
+notebook, but it must have been a damned inspiring one, because the crowd
+responded with 100+ decibels of applause before slowly sinking back in their
+seats, minds collectively blown.
+
+Once we regained our locomotive powers, we filed out into the hallway to cavort
+with our fellow Clojurians. I myself was delighted to be immediately accosted by
+old friends from my [Pitch](https://pitch.com/about) days: Ben, Jakob, Karlis,
+Kathryn, Oscar, Phil, Tibor, and almost certainly others whom my blown mind
+isn't currently able to recall.
+
+After grabbing coffee and gabbing, we headed back into the main hall to take
+in the second keynote.
+
+### From hype to responsibility
+
+Anna Colom's keynote also had nothing to do with Clojure, but everything to do
+with the question of [what works and matters for whom in data and
+AI?](https://compass.heartofclojure.eu/sessions/17592186045456) Before I get
+into my reflections on her talk, I shall step forward and deliver a soliloquy,
+if I may. (That was a rhetorical question, because of course I may; I'm writing
+this and not you! Unless of course you [submit a pull
+request](https://github.com/jmglov/jmglov.net/tree/heart-of-clojure-2024), in
+which it's you writing and not me and maybe you've replaced my soliloquy with a
+meditation on the average air speed velocity of a laden swallow or some such.)
+
+Heart of Clojure, as the name suggests, is a conference ostensibly about
+Clojure, so how is it that neither of the opening keynotes had a single mention
+of Clojure (other than Lu's joke about their criminal choice to use Javascript
+rather than Clojure)?
+
+You see, Clojure is more than a programming language (though it **is** a joyful
+and pragmatic programming language): it's a community. I have no idea if this
+was Arne's intention, but for me, the community **is** the heart of Clojure. The
+idea of a modern Lisp for the JVM is what brought me to the language ago, but
+the kindness, patience, helpfulness, enthusiasm, and inclusiveness of my fellow
+Clojurians is what has kept me here for 15 years, excited about what the next 15
+years will bring. Speaking of inclusion, the idea that we have so much to learn
+from other disciples is something that pervades the community, so we are
+constantly making the effort to include those insights into our language, our
+programs, our ways of thinking, and most of all, our conferences. The vast
+majority of the Clojure conferences I've attended have had at least one talk
+that had nothing to do with Clojure, from [Nada Amin's closing
+keynote](https://2017.euroclojure.org/nada-amin/) at EuroClojure 2017 in Berlin
+where she used Scala to demonstrate the concept of towers of interpreters to
+[Chris Ford's exploration of traditional central African polyphony and
+polyrhythm](https://web.archive.org/web/20231129180740/https://skillsmatter.com/conferences/8783-clojure-exchange-2017#program)
+at Clojure eXchange 2017 to [Jordan Miller showing how mentorship is essential
+to growth during all stages of an engineer's
+career](https://clojuredays.org/dcd2022.html#Got%20a%20Guru?) at Dutch Clojure
+Days 2022. Long may this continue!
+
+Now back to Anna's talk, which was an absolute banger, and hands down my
+favourite talk of the conference (along with my five other favourite talks of
+the conference 😅).
+
+ADD MORE STUFF HERE
 
 ## Photos
 
