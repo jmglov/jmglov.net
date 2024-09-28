@@ -190,8 +190,8 @@ the auditorium just in time for the opening keynote.
 ![Lu Wilson demonstrating their Dreamberd programming language][keynote1]
 [keynote1]: assets/draft-heart-of-clojure-2024-keynote1.jpg "The perfect programming language at work!" width=800px
 
-Photo by Ben Lovell, licenced under the **C'MON BEN, PICK A LICENCE AND DROP IT
-IN THE DISCORD ALREADY, MATE!** 😉
+Photo by Ben Lovell, licenced under [CC BY-SA
+4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
 
 [Lu Wilson kicked the conference
 off](https://2024.heartofclojure.eu/talks/what-it-means-to-be-open/) with a
@@ -301,7 +301,100 @@ Now back to Anna's talk, which was an absolute banger, and hands down my
 favourite talk of the conference (along with my five other favourite talks of
 the conference 😅).
 
-ADD MORE STUFF HERE
+Boiled down to its essence, the talk was asking the question, "what do we do
+about AI?" Anna introduced herself as a social science researcher currently
+working at [The Data Tank](https://www.datatank.org), a research institute which
+is making the case for more responsible reuse of data. She's been working for
+the last 15 years as a researcher at the intersection of democratic processes
+and technology, and she started the talk with a look at the promises that have
+been made about tech as the solution to solving everything: governance problems,
+climate change adaptation, public health issues, etc, and pointed to the fact
+that whilst tech has changed a lot in the past 15 years, those promises have not
+(and remain unmet, if I'm to editorialise a bit). Tech is central to so many
+things in our lives, but the decisions around tech are made by a handful of
+companies such as Google, Microsoft, Apple, Amazon, Meta, Oracle, and nVidia,
+largely in a regulatory vacuum.
+
+Before walking through the major risks of IT, Anna started by introducing the
+concept of technological determinism, the idea that tech is an objective and
+infallible tool for solving all problems. As an example of the dangers of
+believing that computers never make mistakes, (which should be a laughable idea
+for anyone who has ever programmed a computer—just because the logic gates and
+complex circuits that execute our programs obey certain laws of physics, those
+programs are written by humans, who are certainly fallible) Anna talked about
+the [British Post Office "Horizon"
+scandal](https://en.wikipedia.org/wiki/British_Post_Office_scandal). If you
+haven't heard of this, the TLDR is that bugs in the Horizon accounting software
+system led to more than 900 employees of the British Post office being convicted
+of theft, fraud and false accounting between 1999 and 2015, leading to ruined
+lives and at least four suicides. All this despite Fujitsu, the company that
+created the software, knowing about the bugs and not disclosing them. According
+to Anna,
+
+> It shows the consequences it can have when we place more trust in tech than in
+> humans.
+
+She gave a couple more examples: the [Dutch childcare benefits
+scandal](https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal) and the
+[Robodebt Scheme](https://en.wikipedia.org/wiki/Robodebt_scheme) in Australia,
+before moving on to seven risks of AI:
+
+1. Rights and democratic integrity: AI-generated newsfeeds spreading
+   misinformation and disinformation, leading to the polarisation of society.
+2. The climate emergency: not only massive electricity across the entire
+   lifecycle of an LLM system (Google's emissions climbed 50% over the last 5
+   years, mostly due to AI energy demand), and the water needed to cool
+   datacentres (in 2023, ChatGPT alone used 500 millilitres of water for every
+   5-50 prompts).
+3. Economic and social inequalities: automation leading to job losses places
+   those with few resources to learn new skills or move where there may be more
+   job opportunities, and the exploitation of "data labelers" in countries such
+   as Kenya, under poor working conditions and pay.
+4. Bias and discrimination: "Algorithms are nothing more than opinions embedded
+   in code" (to quote [Cathy O'Neil](https://cathyoneil.org/)) which reflect the
+   existing biases in society based on where we live, our ethnicity, skin
+   colour, gender, sexuality, etc, and thus amplify existing oppression. To
+   hammer this point home, she showed [Dr. Joy
+   Buolamwini's](https://poetofcode.com/art/) amazing "[AI, Ain't I a
+   Woman?](https://www.youtube.com/watch?v=QxuyfWoVV98)" video. Stop reading
+   this blog and go watch that now!
+5. Human identity, agency, autonomy: what happens when our interactions with
+   healthcare providers, public services, and our friends and lovers are
+   mediated by AI?
+6. Geopolitics and colonialism: which ways of seeing the world are we
+   encouraging and amplifying through generative AI technologies? Which data
+   from where and in which languages is feeding AI?
+7. Misuse of data: data is being extracted for private use with no consideration
+   for existing IP rules (flawed as they might be, to editorialise again) or
+   legitimate ownership and data sovereignty and kept in silos to solve specific
+   problems rather than to solve societal problems like mobility in cities or
+   optimising energy use.
+
+She ended the talk by asking, "where do we want to go?" and suggested that we
+need regulation; to reclaim our agency to envision and build the societies we
+want to live in; embed public participation in the lifecycle of AI; create
+ecosystems for responsible and sustainable reuse of data; and build a
+transparent, collaborative, and anti-oppressive data science.
+
+These weren't actually the last words of the talk, but this was the last line
+that I wrote down, and I think it sums up what I took away from it:
+
+> We're up against a big balloon of hype that I believe really needs to pop.
+
+I just realised that I wrote a fairly detailed summary of the talk, which wasn't
+my intention. I usually just write down a few notes or quotes in my trusty
+Babashka notebook (the paper kind, not the silicon kind) and then dash a few
+words off in my blog about what I remembered from the talk and how it made me
+feel. In this one, almost every line felt like an applause line to me. My neck
+was sore afterwards from the frequency and ferocity of my nods in agreement, and
+my hand was asleep from sitting on it so I didn't stick my fist up in the air
+constantly.
+
+I loved this talk.
+
+### Lunch and stuff
+
+More words go here please.
 
 ## Photos
 
