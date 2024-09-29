@@ -4,12 +4,12 @@ Tags: clojure,conference debrief
 Description: In which I am reminded that what I love about Clojure isn't parens, it's people
 Discuss: FIXME
 Image: assets/draft-heart-of-clojure-2024-preview.png
-Image-Alt: FIXME
+Image-Alt: A Remarkable e-paper notebook lying on a table
 Preview: true
 
 
-![FIXME ALT TEXT GOES HERE][preview]
-[preview]: assets/draft-heart-of-clojure-2024-preview.png "FIXME HOVER TEXT GOES HERE" width=800px
+![A Remarkable e-paper notebook lying on a table][preview]
+[preview]: assets/draft-heart-of-clojure-2024-preview.png "This Remarkable is almost as remarkable as Heart of Clojure!" width=800px
 
 The curtain rises to reveal a person sitting on an airplane, surrounded by
 people, yet alone in their own thoughts. The person is wearing the standard tech
@@ -190,8 +190,8 @@ the auditorium just in time for the opening keynote.
 ![Lu Wilson demonstrating their Dreamberd programming language][keynote1]
 [keynote1]: assets/draft-heart-of-clojure-2024-keynote1.jpg "The perfect programming language at work!" width=800px
 
-Photo by Ben Lovell, licenced under [CC BY-SA
-4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+*Photo by Ben Lovell, licenced under [CC BY-SA
+4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en)*
 
 [Lu Wilson kicked the conference
 off](https://2024.heartofclojure.eu/talks/what-it-means-to-be-open/) with a
@@ -261,12 +261,17 @@ in the second keynote.
 
 ### From hype to responsibility
 
+![Anna Colom standing under a slide reading: Algorithms are nothing more than opinions embedded in code][keynote2]
+[keynote2]: assets/draft-heart-of-clojure-2024-keynote2.jpg "And those opinions reflect the biases and oppressions of the status quo" width=800px
+
+*Photo by Josh Glover, licenced under [CCO 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) (AKA public domain)*
+
 Anna Colom's keynote also had nothing to do with Clojure, but everything to do
 with the question of [what works and matters for whom in data and
-AI?](https://compass.heartofclojure.eu/sessions/17592186045456) Before I get
-into my reflections on her talk, I shall step forward and deliver a soliloquy,
-if I may. (That was a rhetorical question, because of course I may; I'm writing
-this and not you! Unless of course you [submit a pull
+AI?](https://2024.heartofclojure.eu/talks/from-hype-to-responsibility-what-works-and-matters-for-whom-in-data-and-ai/)
+Before I get into my reflections on her talk, I shall step forward and deliver a
+soliloquy, if I may. (That was a rhetorical question, because of course I may;
+I'm writing this and not you! Unless of course you [submit a pull
 request](https://github.com/jmglov/jmglov.net/tree/heart-of-clojure-2024), in
 which it's you writing and not me and maybe you've replaced my soliloquy with a
 meditation on the average air speed velocity of a laden swallow or some such.)
@@ -390,18 +395,103 @@ was sore afterwards from the frequency and ferocity of my nods in agreement, and
 my hand was asleep from sitting on it so I didn't stick my fist up in the air
 constantly.
 
-I loved this talk.
+I loved this talk!
 
-### Lunch and stuff
+### Lunch
 
-More words go here please.
+![Mediterranean food in small dishes][habibi]
+[habibi]: assets/draft-heart-of-clojure-2024-habibi.jpg "What a spread!" width=800px
 
-## Photos
+After Anna's talk, I headed over to [Hal 5](https://www.hal5.be/), which is an
+old railroad workshop that has now been converted into a big space with
+restaurants, bars, etc. This is where lunch was served and also where the
+workshops on the official conference agenda were held. There was also a
+community space which was open for conference attendees to hold their own
+activities. Arne and crew created a webapp called
+[Compass](https://compass.heartofclojure.eu/) specifically for the conference,
+and if you signed in with Discord as an attendee, you could create an activity
+using the app. More on which later. 😉
 
-These photos will be incorporated into the post at some point.
+Lunch itself was spectacular! It was catered by [Falafel
+Habibi](https://www.facebook.com/falafelhabibi2020), a restaurant in the Hal 5
+food court that served, well, falafel. And of course all the vegan Mediterranean
+and Palestinian specialities that you'd expect alongside falafel: stuffed grape
+leaves, olives, pita, and lots and lots of hummus! 🤤🇵🇸
+
+After lunch, we helped clear away the tables in the activity space to make room
+for the 🪩 [Dance / Movement Break with
+Wendy](https://compass.heartofclojure.eu/sessions/17592186059795) 🪩, in which
+some fun Zumba-style dance videos were projected, and one of the conference
+volunteers (Wendy, maybe?) led a small group of brave Clojurians in some light
+dancing. I was [frantically blogging
+away](https://jmglov.net/blog/2024-09-18-podcast-soundcljoud.html) under a
+self-imposed deadline due to a rash decision I had made a couple of days prior,
+so I sat there next to the wall next to the dancefloor like an uncool dude being
+uncool and just enjoyed the music whilst tapping away on my laptop.
+
+After the dance break, attendees pitched in again to set up chairs in front of
+the screen, and a certain naturally blond, nbb-hating Scittle-loving Clojurian
+got to his feet, plugged the HDMI cable into his laptop, took a deep breath, and
+launched into...
+
+### Scittling up a Podcatcher
+
+![A hand-drawn illustration of a person presenting a slide with the Babashka logo][scittle]
+[scittle]: assets/draft-heart-of-clojure-2024-scittle.jpg "Scittle can catch pods without breaking a sweat!" width=800px
+
+*Drawing by Evgeniy Latukhin, licenced under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), remixed by Josh Glover (full drawing below)*
+
+Remember how I mentioned that attendees could use the Compass app to create
+their own activities? Well, a few days before the conference, I decided that it
+would be "fun" to livecode a podcast player using
+[Scittle](https://github.com/babashka/scittle/) to ~~shamelessly promote~~ share
+with the world a podcast about union organising in Swedish tech companies that
+Ray and I are hosting. 🇸🇪 [orgtech.se](https://orgtech.se) FTW! 🇸🇪
+
+The idea is that I would present a quick minute intro explaining what Scittle is
+and why I'm totally in love with it, then take 30 minutes to code up a web-based
+podcast player in front of the audience, which included Scittle creator
+[borkdude](https://github.com/borkdude) himself. No pressure, Josh! 😅
+
+I somehow accomplished it in "30" minutes *cough cough ahem*, in no small part
+due to the group of Clojurians in the audience helping me spot typos and debug
+small bugs (a portent of what was to come on Thursday, but I'll get to that) and
+be generally enthusiastic and supportive and lovely.
+
+Sometime later, I actually realised that the session in the workshop area right
+behind the activity space was none other than Chris McCormick of [Melody
+Generator](https://dopeloop.ai/melody-generator/) and [Beat
+Generator](https://play.google.com/store/apps/details?id=cx.mccormick.canofbeats&pli=1)
+fame (but sadly not recipefinder.com fame and the accordant big bucks) showing
+us how to [Build full-stack ClojureScript apps with and without
+Sitefox](https://compass.heartofclojure.eu/sessions/17592186045440), using cool
+tools like [Squint](https://github.com/squint-cljs/squint) and disgusting, awful
+ones like [nbb](https://github.com/babashka/nbb). 🤮
+
+borkdude was seated toward the back of my audience, and since only a curtain
+separated the activity space from the workshop space, he said that he could
+multitask and listen to both the Scittle and nbb talks at the same time. 😂
+
+### The Shoulders of Giants or Uncovering the Foundational Ideas of Lisp
+
+After my session was over, I walked outside into a lovely sunny day (the weather
+gods apparently love Clojure too!), down to the tunnel under the central
+station, and through it to arrive back at the Het Depot just in time for Daniel
+Szmulewicz to show us how [John McCarthy stood on the shoulders of giants to
+uncover the foundational ideas of
+Lisp](https://2024.heartofclojure.eu/talks/the-shoulders-of-giants-or-uncovering-the-foundational-ideas-of-lisp/).
+
+![Daniel Szmulewicz stands under his title slide][shoulders]
+[shoulders]: assets/draft-heart-of-clojure-2024-shoulders.jpg "Kurt Gödel scoffs at your perfect palace of pure mathematics" width=800px
+
+*Photo by Josh Glover, licenced under [CCO 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) (AKA public domain)*
+
+Stuff stuff things.
+
+## Photos that will be mixed into the post
 
 ![A hand-drawn illustration of day one of the conference with scenes of: a sofa and coffee table on the main stage; the screen on the main stage showing 'No internet connection. Reload.'; the front entrance to the Het Depot; screen printed t-shirts hanging on a clothesline; a person presenting a low key talk in an activity session in the Het Depot][day1]
 [day1]: assets/draft-heart-of-clojure-2024-day1.jpg "Day 1 of the conference (typical off by one error; this is clearly day 0)" width=800px
 
-Drawing by Evgeniy Latukhin, licenced under the [CC BY
-4.0](https://creativecommons.org/licenses/by/4.0/) licence.
+*Drawing by Evgeniy Latukhin, licenced under the [CC BY
+4.0](https://creativecommons.org/licenses/by/4.0/) licence.*
