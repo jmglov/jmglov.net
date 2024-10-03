@@ -336,8 +336,8 @@ lives and at least four suicides. All this despite Fujitsu, the company that
 created the software, knowing about the bugs and not disclosing them. According
 to Anna,
 
-> It shows the consequences it can have when we place more trust in tech than in
-> humans.
+> "It shows the consequences it can have when we place more trust in tech than
+> in humans."
 
 She gave a couple more examples: the [Dutch childcare benefits
 scandal](https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal) and the
@@ -384,7 +384,7 @@ transparent, collaborative, and anti-oppressive data science.
 These weren't actually the last words of the talk, but this was the last line
 that I wrote down, and I think it sums up what I took away from it:
 
-> We're up against a big balloon of hype that I believe really needs to pop.
+> "We're up against a big balloon of hype that I believe really needs to pop."
 
 I just realised that I wrote a fairly detailed summary of the talk, which wasn't
 my intention. I usually just write down a few notes or quotes in my trusty
@@ -486,12 +486,180 @@ Lisp](https://2024.heartofclojure.eu/talks/the-shoulders-of-giants-or-uncovering
 
 *Photo by Josh Glover, licenced under [CCO 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) (AKA public domain)*
 
-Stuff stuff things.
+I was really looking forward to this talk. Not only was the abstract intriguing,
+but I'd also read [a blog post from Daniel on a similar
+subject](https://danielsz.github.io/20240718T060528--lisps-grandfather-paradox__clojure_lisp_scheme.html).
+The talk did not disappoint!
 
-## Photos that will be mixed into the post
+The premise is that the discovery of Lisp (I've always liked that phrasing, that
+Lisp wasn't invented, it was discovered as surely as the fact that the Earth
+orbits the sun and the Moon causes the tides) was a natural projection from a
+series of mathematical breakthroughs in the 20th century, starting with Gödel's
+infamous destruction of the beautiful mind palace that was Whitehead and
+Russells's "Principia Mathematica", continuing through the coining of the term
+"primitive recursion" and formalising of recursive functions by the prolific
+Hungarian mathematician Rózsa Péter and Turing's work on computation, and
+terminating (sorry not sorry) with McCarthy's discovery that recursion could be
+very elegantly expressed using lists.
+
+His 1960 paper introduced the world to S-expressions (that paper also introduced
+M-expressions as an alternate way to express lists and recursion, for reasons
+that only he—and probably mathematicians, to be fair—knows, but they were
+luckily consigned to the dustbin of history), then [one of his grad
+students](https://en.wikipedia.org/wiki/Steve_Russell_(computer_scientist))
+cheekily went and implemented the eval function on actual hardware and used it
+to implement the rest of the LISP system described in McCarthy's paper,
+something that McCarthy himself didn't think anyone would ever want to do.
+
+> "Steve Russell said, look, why don't I program this eval ... and I said to
+> him, ho, ho, you're confusing theory with practice, this eval is intended for
+> reading, not for computing. But he went ahead and did it. That is, he compiled
+> the eval in my paper into IBM 704 machine code, fixing bugs, and then
+> advertised this as a Lisp interpreter, which it certainly was." –John McCarthy
+
+Handwave about 50 years and many orders of magnitude of increases in computing
+power, and Lisp was finally perfected in the form of Clojure. I'm not sure that
+Daniel even mentioned the word "Clojure" in his talk, and the implementation of
+Lisp was barely a footnote at the end of the story he was telling, which was
+about the giants whose shoulders McCarthy stood on that allowed him to see into
+the promised land of perfectly balanced parens. 😍
+
+This talk absolutely rocked. As an enthusiastic reader of shit I don't really
+understand (like advanced mathematics, particle physics, etc), none of these
+giants or their work was new to me—with the glaring and frankly typical
+exception of a brilliant mathematician who happened to be a woman, Rosa
+Peter—but I'd never connected Gödel to Turing, let alone drawn a straight line
+from the arrogant cowardice of Whitehead and Russell through to the glory of
+S-expressions and the mind-blowing metacircular interpreter that from the first
+wast present, and with mighty wings outspread dove-like satst brooding on the
+vast Abyss of the [IBM 704](https://en.wikipedia.org/wiki/IBM_704) and mad'st it
+LISP.
+
+A cool little nugget from this talk was the fact that the idea that Lisp is
+based on Alonso Church's Lambda calculus is actually a misconception. As Daniel
+put it:
+
+> "Mythology is a common trait of the scientific narrative."
+
+I talked to Daniel in the hallway later and thanked him for the thrilling ride
+through the first half of the 20th century, and he said that he had been
+extremely anxious to give the talk, but that Arne had trusted him and that gave
+him the courage to put himself out there, to our great benefit! I hope you felt
+the love pouring out of the Heart of Clojure, Daniel!
+
+Of course, me being me, my main takeaway from the talk was this:
+
+> "The set of all sets is a member of itself because it is a set, but the set of
+> all penguins is not a member of itself because it is not a penguin."
+
+### Open hearts for diversity
+
+The next thing I attended was a workshop back in Hal 5 called [Open hearts for
+diversity](https://2024.heartofclojure.eu/talks/open-hearts-for-diversity/),
+hosted by Katja Böhnke. It was well attended, with about 25-30 people, many of
+them men, which was great to see. Katja had arranged six tables and asked us to
+sit down in small groups of 4-5 people per table, and we did several exercises
+which were designed to get us thinking about what diversity meant to us.
+
+The first exercise was "diversity bingo", in which we had a bingo card filled
+with different statements such as "grew up in a different country from where you
+live", "gender non-conforming", "grew up in a multi-generational household",
+"orphaned", "grew up in a rural area", "speaks multiple languages", etc. We had
+to walk around the room asking the other workshop attendees the questions in
+order to complete the bingo card. I'm not sure that anyone actually got bingo,
+but it was a really interesting exercise that not only introduced us to other
+people, but highlighted that some questions were **really** uncomfortable to ask
+(for example: "one of your parents died during your childhood").
+
+The next exercise had us sit in groups and discuss a series of questions, the
+first of which was "what does diversity mean to you?" We had a few minutes to
+discuss, after which everyone save one person would get up and move to another
+table. The person who remained would summarise what was discussed, then the new
+group discussed the next question. We had stickies and big flipchart sheets for
+taking notes, and it was very cool to walk around the room after the session and
+look at what people had noted down.
+
+![A flipchart paper with the phrase 'Resistance to the norm.' written on it][resistance]
+[resistance]: assets/draft-heart-of-clojure-2024-resistance.jpg "Resistance is not futile. You must not be assimilated!" width=800px
+
+After the workshop, I went outside with Katja and few other attendees and sat
+down in the late afternoon sun to continue discussing some of the topics that
+had come up in the session. It was the perfect end to a really lovely day for
+me, as I preferred to sit in fellowship to attending any more of the talks,
+which were after all recorded, so I can watch them when they're posted. 😊
+
+I love this summary of day 0, hand-drawn and shared by Evgeniy Latukhin:
 
 ![A hand-drawn illustration of day one of the conference with scenes of: a sofa and coffee table on the main stage; the screen on the main stage showing 'No internet connection. Reload.'; the front entrance to the Het Depot; screen printed t-shirts hanging on a clothesline; a person presenting a low key talk in an activity session in the Het Depot][day1]
 [day1]: assets/draft-heart-of-clojure-2024-day1.jpg "Day 1 of the conference (typical off by one error; this is clearly day 0)" width=800px
 
 *Drawing by Evgeniy Latukhin, licenced under the [CC BY
 4.0](https://creativecommons.org/licenses/by/4.0/) licence.*
+
+### The speakers dinner and banging beats
+
+I seem to have a gift for sneaking into the speakers dinner at every conference
+I attend (OK, occasionally I'm actually there legitimately because I gave a talk
+or was one of the organisers), and Heart of Clojure was no exception. I had fun
+sitting next to Lu Wilson and Eric Normand, and Dave Liepmann rocked up at some
+point and did his trademark 180° chair rotation intense sit down manoevre in
+order to prepare himself emotionally to join the conversation. Oh yeah, and Ray
+was there also. 😅
+
+The vegan pizza (or vizza) was almost as good as the conversation, and boy oh
+boy have they come a long way with alcohol free beer, because that ice cold
+lager paired perfectly with the perfect pizza!
+
+After the dinner, several live coding musical sets want on, starting with [the
+funky chill ambient beats of Dimitris
+Kyriakoudis](https://compass.heartofclojure.eu/sessions/17592186053789), and
+then moving into [some house music from the excellent
+pulu](https://compass.heartofclojure.eu/sessions/17592186053605) I was standing
+in a Pacman group (when conversing in a circle, always make sure to leave a gap
+shaped like Pacman's mouth so that others can join without feeling like they're
+intruding) remarking on how funny it was that both live coding sets at a Clojure
+conference were done in Haskell—I guess creating electronic music without a
+sound type system is immoral—when the dancing-est German you'll ever meet
+shimmied into the circle, gleaming white vegan Adidas sneakers (or veakers)
+catching the light just right, body moving to the rhythm and infecting all who
+beheld him with a wide grin... it was Tibor! I had the good fortune to work with
+Tibor for about a year and a half 'at Pitch, and it was great to catch up with
+him!
+
+At some point, Laddo popped his head in the door of Hal 5 to let us know that he
+had just come from Het Depot, and they were locking the doors soon. Ray and I
+said our goodbyes and followed Laddo back to where we'd stowed our bikes in the
+Depot, saddled up, and headed home. We all had lights on our bikes, but whilst
+Ray and Laddo had proper headlamps, I only had the hub lights that let other
+people and vehicles and such see me, but didn't help me see a damned thing
+vis-à-vis where I was actually going. Which was fine on the pleasantly lit bike
+paths of Leuven, but was less fine in the Belgian countryside between Leuven and
+Ray's place, and was holy shit are you actually trying to kill me not fine once
+we turned onto the dirt path through the woods that was millimetres from a gorge
+with nothing between me and long fall to an icy death.
+
+Cursing Ray with every fibre of my being that wasn't otherwise occupied with
+trying to avoid the bloody great ruts and mud puddles in the trail and also not
+dying, I gritted my teeth and somehow survived 980 metres of the 1 kilometre
+trail. I must have been prematurely celebrating, however, and forgot the old
+expression "it's the last 20 metres that kills," because when I attempted to
+take a 90° turn on a racing bike in the dark wearing a 25 kilo back pack onto a
+rickety-ass wooden bridge, I didn't lean hard enough into the turn, and started
+to lose my balance. "Oh shit," I thought to myself (or screamed out loud,
+according to Laddo), "I'm going to die." And death would have been all but
+certain, given the frothing rapids hundreds of metres below me, pounding their
+way through jagged volcanic rock before plunging away into misty blackness,
+until my hand blessedly made contact with a wooden railing. I'd never been so
+happy to have all the skin flayed off my right hand before in my life!
+
+Heart pounding, I finished the remaining one minute of delightfully paved road
+to Ray's house with relief, then hopped off the bike, threw my helmet at Ray and
+swore I'd never get on a bike again in my life. To his credit, he waited to make
+sarcastic and hurtful remarks to Laddo until he thought I was out of earshot. To
+his even greater credit, he promptly deposited an alcohol-Free Punk IPA in my
+hand (damn they're doing great stuff without alcohol over at Browdog!) and all
+was forgiven.
+
+## Day 1
+
+More stuff here to be sure.
