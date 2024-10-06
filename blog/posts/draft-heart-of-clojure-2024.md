@@ -529,11 +529,30 @@ understand (like advanced mathematics, particle physics, etc), none of these
 giants or their work was new to me—with the glaring and frankly typical
 exception of a brilliant mathematician who happened to be a woman, Rosa
 Peter—but I'd never connected Gödel to Turing, let alone drawn a straight line
-from the arrogant cowardice of Whitehead and Russell through to the glory of
-S-expressions and the mind-blowing metacircular interpreter that from the first
-wast present, and with mighty wings outspread dove-like satst brooding on the
-vast Abyss of the [IBM 704](https://en.wikipedia.org/wiki/IBM_704) and mad'st it
-LISP.
+from the arrogant cowardice of Whitehead and Russell...
+
+**We now interrupt this shitpost with a word from the speaker**
+
+> [W]hen characterizing Russell and Whitehead, I'd rather talk about the blind
+> faith in the human spirit rather than arrogant cowardice. Arrogance, yes,
+> maybe, cowardice, no. In my view what Russell and Whitehead give away with
+> their stance is an idealistic or narcissistic projection on our selves. And
+> they were hardly alone in this. There were actual
+> "[culture  wars](https://en.wikipedia.org/wiki/Ignoramus_et_ignorabimus)"
+> around the extent of scientific knowledge or its limitations. David Hilbert's
+> "in mathematics there is no *ignorabimus*" typifies this as well. Or his
+> *Wir müssen wissen – wir werden wissen*. Misguided, overconfident,
+> self-flattering, all of those may apply while retaining the good faith in
+> which those views were aired.
+
+–Daniel Szmulewicz, in response to reading my draft 😍
+
+**Now back to my arrogant cowardice**
+
+...through to the glory of S-expressions and the mind-blowing metacircular
+interpreter that from the first wast present, and with mighty wings outspread
+dove-like satst brooding on the vast Abyss of the [IBM
+704](https://en.wikipedia.org/wiki/IBM_704) and mad'st it LISP.
 
 A cool little nugget from this talk was the fact that the idea that Lisp is
 based on Alonso Church's Lambda calculus is actually a misconception. As Daniel
