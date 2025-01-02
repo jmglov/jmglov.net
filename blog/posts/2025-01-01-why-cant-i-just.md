@@ -2,7 +2,6 @@ Title: Why can't I just?
 Date: 2025-01-01
 Tags: waffle,writing
 Description: In which I complain about a bunch of stuff
-Discuss: FIXME
 Image: assets/2025-01-01-why-cant-i-just-preview.jpg
 Image-Alt: A picture of a three-monitor computer display labelled &quot;My New Year's resolution is 5760x1080&quot;
 
