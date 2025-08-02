@@ -1,5 +1,5 @@
 {:deps {jmglov/jmglov {:local/root "."}
-        io.github.borkdude/quickblog {:local/root "../clojure/quickblog"}
+        io.github.borkdude/quickblog {:local/root "../quickblog"}
         #_"You use the newest SHA here:"
         #_{:git/sha "b69c11f4292702f78a8ac0a9f32379603bebf2af"}
         }
