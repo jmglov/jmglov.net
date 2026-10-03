@@ -30,6 +30,6 @@ beginners.
 - [Functional Programming with Clojure](teaching/clojure/fpwc/): Learning
   functional programming for programmers without previous functional or Clojure
   experience.
-- [Clojure for Functional Programmers](teaching/clojure/fpwc/): Learning Clojure
+- [Clojure for Functional Programmers](teaching/clojure/cffp/): Learning Clojure
   for programmers with previous functional experience.
 
