@@ -32,4 +32,5 @@ beginners.
   experience.
 - [Clojure for Functional Programmers](teaching/clojure/cffp/): Learning Clojure
   for programmers with previous functional experience.
-
+- [Quilt](quilt/): Learning how to program (in Clojure, but that's not obvious)
+  for kids (ages 8-14 seems to be the sweet spot).
