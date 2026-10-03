@@ -26,3 +26,17 @@ To publish just the blog:
 ```
 bb publish-blog
 ```
+
+### Blogging
+
+To create a new draft:
+
+``` text
+bb new-draft --file POST-NAME
+```
+
+To see all options for creating drafts:
+
+``` text
+bb new-draft --help
+```
