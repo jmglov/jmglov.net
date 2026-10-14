@@ -2,11 +2,12 @@
   (:require
    [babashka.fs :as fs]
    [clojure.edn :as edn]
+   [clojure.java.io :as io]
    [clojure.set :as set]
    [clojure.string :as str]
    [hiccup2.core :as hiccup]
    [highlighter :as h]
-   [markdown.core :as md]
+   [quickblog.internal :as quickblog]
    [selmer.parser :as selmer])
   (:import (java.time.format DateTimeFormatter)))
 
@@ -90,44 +91,7 @@
 (defn post-process-markdown [html]
   (str/replace html "$$RET$$" "\n"))
 
-(defn markdown->html [file]
-  (let [markdown (slurp file)]
-    (println "Processing markdown for file:" (str file))
-    (-> markdown
-        pre-process-markdown
-        (md/md-to-html-string-with-meta :reference-links? true)
-        :html
-        post-process-markdown)))
-
-(defn load-post
-  ([file]
-   (load-post file {}))
-  ([file default-metadata]
-   {:html (delay (markdown->html file))
-    :metadata (do
-                (println "Reading metadata for file:" (str file))
-                (-> (slurp file)
-                    md/md-to-meta
-                    (transform-metadata default-metadata)
-                    (assoc :file (.getName file))))}))
-
-(defn load-posts
-  "Returns all posts from `post-dir` in descending date order"
-  ([posts-dir]
-   (load-posts posts-dir {}))
-  ([posts-dir default-metadata]
-   (->> (fs/glob posts-dir "*.md")
-        (map #(load-post (.toFile %) default-metadata))
-        (remove
-         (fn [{:keys [metadata]}]
-           (when-let [missing-keys
-                      (seq (set/difference required-metadata
-                                           (set (keys metadata))))]
-             (println "Skipping" (:file metadata)
-                      "due to missing required metadata:"
-                      (str/join ", " (map name missing-keys)))
-             :skipping)))
-        (sort-by (comp :date :metadata) (comp - compare)))))
+(def markdown->html quickblog/markdown->html)
 
 (defn add-modified-metadata
   "Adds :modified? to each post showing if it is new or modified more recently than `out-dir`"

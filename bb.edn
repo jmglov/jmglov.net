@@ -2,6 +2,7 @@
         io.github.borkdude/quickblog {:local/root "../quickblog"}
         #_"You use the newest SHA here:"
         #_{:git/sha "b69c11f4292702f78a8ac0a9f32379603bebf2af"}
+        io.github.nextjournal/markdown {:mvn/version "0.7.186"}
         }
  :pods {clj-kondo/clj-kondo {:version "2022.05.31"}}
  :tasks
