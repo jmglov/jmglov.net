@@ -71,6 +71,10 @@ code {
   white-space: nowrap;
 }
 
+img {
+  max-width: 100%;
+}
+
 img.border {
   border-style: solid;
   border-width: 1px;
