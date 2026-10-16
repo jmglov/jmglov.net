@@ -4,10 +4,16 @@
             [clojure.edn :as edn]
             [clojure.string :as str]
             [quickblog.api :as qb]
-            [tick.core :as t]))
+            [tick.core :as t]
+            [markdown :as md]))
 
 (defn read-opts []
-  (-> (slurp "opts.edn") edn/read-string))
+  (-> (slurp "opts.edn")
+      edn/read-string
+      (assoc
+       :pre-process-markdown-fns [md/pre-process-ref-links
+                                  md/pre-process-img-refs]
+       :post-process-markdown-fns [md/post-process-img-refs])))
 
 (defn new-draft [opts args]
   (let [{:keys [file title date] :as parsed-opts}
