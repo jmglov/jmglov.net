@@ -34,17 +34,6 @@
     (fs/create-dirs (.getParent (fs/file target)))
     (fs/copy src target {:replace-existing true})))
 
-(defn copy-tree-modified [src-dir target-dir out-dir]
-  (let [modified-paths (fs/modified-since (fs/file target-dir)
-                                          (fs/file src-dir))
-        new-paths (->> (fs/glob src-dir "**")
-                       (remove #(fs/exists? (fs/file out-dir %))))]
-    (doseq [path (concat modified-paths new-paths)
-            :let [target-path (fs/file out-dir path)]]
-      (fs/create-dirs (.getParent target-path))
-      (println "Writing" (str target-path))
-      (fs/copy (fs/file path) target-path {:replace-existing true}))))
-
 (defn rfc-3339-now []
   (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
         now (java.time.ZonedDateTime/now java.time.ZoneOffset/UTC)]
@@ -92,6 +81,8 @@
   (str/replace html "$$RET$$" "\n"))
 
 (def markdown->html quickblog/markdown->html)
+
+(def copy-tree-modified quickblog/copy-tree-modified)
 
 (defn add-modified-metadata
   "Adds :modified? to each post showing if it is new or modified more recently than `out-dir`"

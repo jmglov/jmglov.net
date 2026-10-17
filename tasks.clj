@@ -1,19 +1,92 @@
 (ns tasks
   (:require [babashka.cli]
             [babashka.fs :as fs]
+            [babashka.http-server :as http]
             [clojure.edn :as edn]
             [clojure.string :as str]
             [quickblog.api :as qb]
+            [selmer.parser :as selmer]
             [tick.core :as t]
-            [markdown :as md]))
+            [maria]
+            [markdown :as md]
+            [lib]))
+
+(defn render-list [opts xs]
+  (cond
+    (empty? opts) xs
+    (string? xs) (render-list opts [xs])
+    :else (map #(selmer/render % opts) xs)))
+
+(defn ->file
+  ([parts]
+   (->file {} parts))
+  ([opts parts]
+   (let [parts (if (empty? opts)
+                 parts
+                 (render-list opts parts))]
+     (apply fs/file parts))))
+
+(defn render-site-opts [opts]
+  (let [opts (->> [:site-templates-dir
+                   :site-base-template]
+                  (map (fn [k]
+                         [k (->file opts (get opts k))]))
+                  (into {})
+                  (merge opts))]
+    (-> opts
+        (update :site-rendering-system-files #(render-list opts %)))))
 
 (defn read-opts []
   (-> (slurp "opts.edn")
       edn/read-string
+      render-site-opts
       (assoc
        :pre-process-markdown-fns [md/pre-process-ref-links
                                   md/pre-process-img-refs]
        :post-process-markdown-fns [md/post-process-img-refs])))
+
+(defn render-site [{:keys [assets-dir
+                           templates-dir
+                           site-out-dir
+                           site-templates-dir
+                           site-base-template
+                           site-rendering-system-files
+                           maria-src-base-url]
+                    :as opts}]
+  (let [files (->> "files.edn"
+                   slurp
+                   (format "[%s]")
+                   edn/read-string
+                   (map (partial maria/mariafy maria-src-base-url)))
+        assets-out-dir (fs/create-dirs (fs/file site-out-dir assets-dir))
+        favicon-dir (fs/create-dirs site-out-dir)
+        style-src (fs/file templates-dir "style.css")
+        style-target (fs/file site-out-dir "style.css")]
+    (when (fs/exists? assets-dir)
+      (lib/copy-tree-modified assets-dir assets-out-dir))
+    (lib/copy-modified style-src style-target)
+    (doseq [file (fs/glob "favicon" "**")
+            :let [outfile (fs/file favicon-dir (fs/file-name file))]]
+      (when (lib/stale? file outfile)
+        (println "Writing favicon file:" (str outfile))))
+    (doseq [{:keys [file dir title context-map]} files]
+      (when dir
+        (fs/create-dirs (format "%s/%s" site-out-dir dir)))
+      (let [out-file (fs/file site-out-dir (lib/html-file file))
+            markdown-file (fs/file file)]
+        (when (or
+               (lib/rendering-modified? site-rendering-system-files
+                                        out-file)
+               (lib/stale? markdown-file out-file)
+               (lib/stale? site-base-template out-file))
+          (let [body (lib/markdown->html opts markdown-file)]
+            (println "Writing page:" (str out-file))
+            (spit out-file
+                  (selmer/render (slurp site-base-template)
+                                 (merge opts
+                                        context-map
+                                        {:title title
+                                         :body body})))))))))
 
 (defn new-draft [opts args]
   (let [{:keys [file title date] :as parsed-opts}
@@ -64,6 +137,18 @@
       (println "Killing livejs file:" (str (fs/file-name f)))
       (fs/delete f)))
   (qb/quickblog opts))
+
+(defn http-server [{:keys [http-port site-out-dir] :as opts}]
+  (let [http-port (if (int? http-port) http-port (Integer/parseInt http-port))]
+    (println (format "Starting webserver on port %d with root %s"
+                     http-port site-out-dir))
+    (try
+      (http/serve {:port http-port, :dir site-out-dir})
+      ;; Annoyingly, this prints even when an exception is thrown
+      (println (format "Serving static assets at http://localhost:%d" http-port))
+      (catch java.net.BindException e
+        (println (format "Address in use: localhost:%d" http-port))
+        (throw e)))))
 
 (defn set-date [opts args]
   (let [{:keys [file date] :as parsed-opts} (babashka.cli/parse-opts (seq args))

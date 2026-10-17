@@ -20,6 +20,10 @@ a {
   padding: 0 2em 0 2em;
 }
 
+.home-wrapper {
+  padding-top: 2em;
+}
+
 h2 {
   margin-bottom: 0;
   margin-top: 0;
@@ -36,8 +40,20 @@ p {
   position: relative;
 }
 
+.home-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .site-title {
   margin: 0;
+}
+
+.home-title {
+  align-self: center;
+  padding-left: 1em;
+  margin: 0;
+  font-size: 1.5em;
 }
 
 .site-nav {
@@ -50,12 +66,28 @@ p {
   padding: 10px;
 }
 
+.home-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  max-width: 200px;
+  padding: 1em;
+  background-color: lightgray;
+}
+
+h3.page-link {
+  align-self: center;
+  margin: 0;
+  font-size: 1em;
+}
+
 .page-link {
   text-decoration: none;
   vertical-align: middle;
 }
 
 .page-icon {
+  width: 30px;
   vertical-align: middle;
 }
 

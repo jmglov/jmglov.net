@@ -1,3 +1,7 @@
+Title: Clojure for Functional Programmers
+Date: 2026-10-17
+Description: Clojure for Functional Programmers
+
 Clojure for Functional Programmers is an interactive course for people without
 previous Clojure experience but who are familiar with the basic concepts of
 functional programming, either in a functional language like Haskell, ML, or

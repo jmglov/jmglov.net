@@ -1,4 +1,14 @@
-{:blog-title "jmglov's blog"
+{
+ ;; Site opts
+ :http-port 1887
+ :site-out-dir "public"
+ :site-templates-dir "templates"
+ :site-base-template ["{{site-templates-dir}}" "base.html"]
+ :maria-src-base-url "raw.githubusercontent.com/jmglov/jmglov.net/main/"
+ :site-rendering-system-files ["lib.clj" "tasks.clj" "{{templates-dir}}"]
+
+ ;; Blog opts
+ :blog-title "jmglov's blog"
  :blog-author "Josh Glover"
  :blog-description "A blog about stuff but also things."
  :blog-root "https://jmglov.net/blog/"

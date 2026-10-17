@@ -1,3 +1,7 @@
+Title: Code of conduct
+Date: 2026-10-17
+Description: Code of conduct
+
 # Code of Conduct
 
 ## Purpose
@@ -89,13 +93,13 @@ this discussion forum without warning.
 ## Reporting Guidelines
 
 If you are subject to or witness unacceptable behavior, or have any other
-concerns, please notify me as soon as possible by emailing jmglov@gmail.com or
+concerns, please notify me as soon as possible by emailing jmglov@jmglov.net or
 pinging me at @jmglov on Clojurians Slack.
 
 ## Addressing Issues
 
 Only permanent resolutions (such as bans) may be changed. To discuss a decision,
-contact me at jmglov@gmail.com and I will review your question.
+contact me at jmglov@jmglov.net and I will review your question.
 
 ## License and attribution
 

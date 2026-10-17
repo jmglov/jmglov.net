@@ -1,4 +1,5 @@
 {:deps {jmglov/jmglov {:local/root "."}
+        io.github.babashka/http-server {:git/sha "c7fefc73480ed82b4cc7401ca6e5b6ef1010d4ae"}
         io.github.borkdude/quickblog {:local/root "../quickblog"}
         #_"You use the newest SHA here:"
         #_{:git/sha "b69c11f4292702f78a8ac0a9f32379603bebf2af"}
@@ -15,6 +16,9 @@
              [quickblog.cli :as cli]
              [tasks])
   :init (def opts (tasks/read-opts))
+
+  dev {:doc "Serve main site"
+       :task (tasks/http-server opts)}
 
   quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
              :task (cli/dispatch opts)}
@@ -34,17 +38,21 @@
                      :task (qb/refresh-templates opts)}
 
   render {:doc "Render website"
-          :task (load-file "render.clj")}
+          :task (tasks/render-site opts)}
 
   render-blog {:doc "Render blog"
                :task (tasks/render-blog opts)}
+
+  render-all {:doc "Render website and blog"
+              :task (do
+                      (tasks/render-site opts)
+                      (tasks/render-site opts))}
 
   publish {:doc "Publish to jmglov.net"
            :depends [render publish-blog]
            :task (shell "aws s3 sync public/ s3://jmglov.net/")}
 
   publish-blog {:doc "Publish blog"
-                #_:depends #_[render-blog]
                 :task (shell "aws s3 sync --delete public/blog/ s3://jmglov.net/blog/")}
 
   clean {:doc "Remove .work and public directory"
