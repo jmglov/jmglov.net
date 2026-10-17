@@ -37,19 +37,11 @@ p {
   border-top: 2px solid #424242;
   border-bottom: 1px solid #e8e8e8;
   min-height: 55.95px;
-  position: relative;
-}
-
-.home-header {
   display: flex;
   justify-content: space-between;
 }
 
 .site-title {
-  margin: 0;
-}
-
-.home-title {
   align-self: center;
   padding-left: 1em;
   margin: 0;
@@ -57,20 +49,10 @@ p {
 }
 
 .site-nav {
-  float: right;
-  background-color: lightgray;
   display: flex;
   justify-content: space-between;
   width: 40%;
-  margin-top: 12px;
-  padding: 10px;
-}
-
-.home-nav {
-  display: flex;
-  justify-content: space-between;
-  width: 40%;
-  max-width: 200px;
+  max-width: 300px;
   padding: 1em;
   background-color: lightgray;
 }
@@ -111,6 +93,15 @@ img {
 img.border {
   border-style: solid;
   border-width: 1px;
+}
+
+.post-link {
+  text-decoration: none;
+}
+
+.post-link:hover {
+  text-decoration: underline;
+  color: blue;
 }
 
 .post-footer {

@@ -1,6 +1,6 @@
 {% for post in posts %}
     <div>
-        <h1><a href="{{post.post-link}}">{{post.title}}</a></h1>
+        <h1><a href="{{post.post-link}}" class="post-link">{{post.title}}</a></h1>
         {{post.body | safe}}
         {% if post.truncated %}
         <p><a href="{{post.post-link}}">Continue reading</a></p>

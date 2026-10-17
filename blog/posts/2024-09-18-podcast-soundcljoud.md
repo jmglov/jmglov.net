@@ -973,7 +973,7 @@ back and forgot to blog about. Or we could just open up
 [https://otranscribe.com/](https://otranscribe.com/) in our browser and click
 the big blue "Start transcribing" button, then click the "Choose audio (or
 video) file" button and choose our
-`~/code/orgtech-se/ep01-klarna-part1/otis-ep01-klarna-part1.mp3` file, and then
+~/code/orgtech-se/ep01-klarna-part1/otis-ep01-klarna-part1.mp3 file, and then
 paste in our Zencastr transcript, warts and all. If we click the Play button (or
 hit Esc, which is oTranscribe's play/pause keyboard shortcut), our episode will
 start playing, and we can hit Ctrl+J to add a timestamp to the transcript when
@@ -984,8 +984,7 @@ have a pristine transcript!
 [otr]: assets/2024-09-18-podcast-soundcljoud-otr.png "Cleaning this up is an exercise for the reader" width=800px border=1
 
 We'll now click the "Export" button to pop up the "Download transcript as..."
-dialog, select "oTranscribe format (.otr)", and save as a new
-`~/code/orgtech-se/ep01-klarna-part1/otis-ep01-klarna-part1.otr` file.
+dialog, select "oTranscribe format (.otr)", and save as a new file named ~/code/orgtech-se/ep01-klarna-part1/otis-ep01-klarna-part1.otr.
 
 ## Feed me some episodes
 
@@ -998,7 +997,7 @@ already did the hard work of creating code that knows how to write an RSS file
 for a music album, why don't we see if we can modify it a bit to support
 podcasts as well?
 
-Let's pop over to `~/code/soundcljoud/processor/main.clj` and remind
+Let's pop over to ~/code/soundcljoud/processor/main.clj and remind
 ourselves how we turned an album into an RSS feed:
 
 ``` clojure
@@ -1046,7 +1045,7 @@ Let's sketch out a `podcast-feed` function:
 
 The first question is where we get the `podcast-info`. We got `album-info` from
 Discogs, but since Discogs presumably knows nothing about our podcast (and why
-would it?), let's create a static `~/code/orgtech/podcast.edn` file instead,
+would it?), let's create a static ~/code/orgtech/podcast.edn file instead,
 fill it with whatever data our podcast feed will need (I guess it's time to
 rhyme), and read in the EDN before calling this function.
 
@@ -1173,7 +1172,7 @@ Let's give this a go in our REPL:
   )
 ```
 
-Let's now come back to that tricky `<itunes:category>` tag. Referring back to
+Let's now come back to that tricky <itunes:category> tag. Referring back to
 the Apple docs, we see:
 
 > For a complete list of categories and subcategories, see Apple Podcast
@@ -1184,13 +1183,13 @@ the Apple docs, we see:
 >
 > Single category:
 >
->   `<itunes:category text="History" />`
+>   <itunes:category text="History" />
 > 
 > Category with subcategory:
 > 
->   `<itunes:category text="Society &amp; Culture">`
->   `  <itunes:category text="Documentary" />`
->   `</itunes:category>`
+>   <itunes:category text="Society &amp; Culture">
+>     <itunes:category text="Documentary" />
+>   </itunes:category>
 
 We can add categories to our `podcast-feed.rss` template using Selmer's
 [for](https://github.com/yogthos/Selmer?tab=readme-ov-file#for) tag:
@@ -1684,8 +1683,10 @@ OK, now we're ready to give it a spin in the REPL:
 
 This looks like a good start, but a few things jump out at us:
 1. Our `<itunes:duration>` tag is empty
-2. We still have a few Selmer template variables in our output, for example: `<a
-   href=\"{{base-url}}{{episode.path}}/\">episode page</a>`
+2. We still have a few Selmer template variables in our output, for example:
+   ``` html
+   <a href=\"{{base-url}}{{episode.path}}/\">episode page</a>
+   ```
 
 Let's tackle the duration issue first, because we already have the tools to fix
 that in the soundcljoud.processor code that we wrote for Garth:

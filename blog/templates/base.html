@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>{{title}}</title>
-    <meta charset="utf-8"/>
-    <link type="application/atom+xml" rel="alternate" href="{{relative-path | safe}}atom.xml" title="{{title}}">
-    <link rel="stylesheet" href="{{relative-path | safe}}style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-clojure.min.js"></script>
-    {{watch | safe }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css">
+
+<head>
+  <title>{{title}}</title>
+  <meta charset="utf-8"/>
+  <link type="application/atom+xml" rel="alternate" href="{{relative-path | safe}}atom.xml" title="{{title}}">
+  <link rel="stylesheet" href="{{relative-path | safe}}style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-clojure.min.js"></script>
+  {{watch | safe }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css">
 
 {% if favicon-tags %}{{favicon-tags | safe}}{% endif %}
 
-    <!-- Social sharing (Facebook, Twitter, LinkedIn, etc.) -->
-    <meta name="title" content="{{title}}">
-    <meta name="twitter:title" content="{{title}}">
-    <meta property="og:title" content="{{title}}">
-    <meta property="og:type" content="website">
+  <!-- Social sharing (Facebook, Twitter, LinkedIn, etc.) -->
+  <meta name="title" content="{{title}}">
+  <meta name="twitter:title" content="{{title}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:type" content="website">
 {% if sharing.description %}
-    <meta name="description" content="{{sharing.description}}">
-    <meta name="twitter:description" content="{{sharing.description}}">
-    <meta property="og:description" content="{{sharing.description}}">
+  <meta name="description" content="{{sharing.description}}">
+  <meta name="twitter:description" content="{{sharing.description}}">
+  <meta property="og:description" content="{{sharing.description}}">
 {% endif %}
 {% if sharing.url %}
-    <meta name="twitter:url" content="{{sharing.url}}">
-    <meta property="og:url" content="{{sharing.url}}">
+  <meta name="twitter:url" content="{{sharing.url}}">
+  <meta property="og:url" content="{{sharing.url}}">
 {% endif %}
 {% if sharing.image %}
-    <meta name="twitter:image" content="{{sharing.image}}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:image" content="{{sharing.image}}">
-    <meta property="og:image:alt" content="{{sharing.image-alt}}">
+  <meta name="twitter:image" content="{{sharing.image}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="{{sharing.image}}">
+  <meta property="og:image:alt" content="{{sharing.image-alt}}">
 {% else %}
-    <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary">
 {% endif %}
 {% if sharing.author %}
-    <meta name="twitter:creator" content="{{sharing.author}}">
+  <meta name="twitter:creator" content="{{sharing.author}}">
 {% endif %}
 {% if sharing.twitter-handle %}
-    <meta name="twitter:site" content="{{sharing.twitter-handle}}">
+  <meta name="twitter:site" content="{{sharing.twitter-handle}}">
 {% endif %}
-  </head>
-  <body>
+</head>
 
-    <div class="site-header">
-      <div class="wrapper">
-        <div class="site-nav">
-          <div>
-            🗃️ <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
-          </div>
-          <div>
-            🏷 <a class="page-link" href="{{relative-path | safe}}tags/index.html">Tags</a>
-          </div>
-        <div>
-            <img src="{{relative-path | safe}}assets/rss-color-svgrepo-com.svg" alt="RSS icon"
-                style="width: 15px; height: 15px;" />
-            <a class="page-link" href="{{relative-path | safe}}atom.xml">Feed</a>
-          </div>
-          {% if about-link %}
-          <div>
-            🪪 <a class="page-link" href="{{about-link}}">About</a>
-          </div>
-          {% endif %}
-        </div>
-        <div>
-          <h1 class="site-title">
-            <a class="page-link" href="{{relative-path | safe}}index.html">{{blog-title}}</a>
-          </h1>
-          <p>{{blog-description}}</p>
-        </div>
-      </div>
-    </div>
+<body>
 
-    <div class="wrapper">
-
-      {{body | safe }}
-
-      {% if not skip-archive %}
-      <div id="archive-footer">
+  <div class="site-header">
+    <h1 class="site-title">
+      <a class="page-link" href="{{relative-path | safe}}index.html">{{blog-title}}</a>
+    </h1>
+    <div class="site-nav">
+      <div>
         🗃️ <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
       </div>
-      {% endif %}
+      <div>
+        🏷 <a class="page-link" href="{{relative-path | safe}}tags/index.html">Tags</a>
+      </div>
+      <div>
+        <img src="{{relative-path | safe}}assets/rss-color-svgrepo-com.svg" alt="RSS icon"
+          style="width: 15px; height: 15px;" />
+        <a class="page-link" href="{{relative-path | safe}}atom.xml">Feed</a>
+      </div>
+{% if about-link %}
+      <div>
+        🪪 <a class="page-link" href="{{about-link}}">About</a>
+      </div>
+{% endif %}
     </div>
-  </body>
+  </div>
+
+  <div class="wrapper">
+    {{body | safe }}
+    {% if not skip-archive %}
+    <div id="archive-footer">
+      🗃️ <a class="page-link" href="{{relative-path | safe}}archive.html">Archive</a>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+
 </html>
